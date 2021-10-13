@@ -6,10 +6,18 @@ User = get_user_model()
 
 class Book(models.Model):
     title = models.CharField(max_length=150)
-    book_id = models.PositiveIntegerField()
+    book_id = models.CharField(max_length=100)
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{' '.join([i.capitalize() for i in self.title.split()])} - [ {self.book_id} ]"
 
 class Order(models.Model):
     student = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="orders")
     book = models.OneToOneField(Book, related_name="order", on_delete=models.DO_NOTHING)
-    dateOfIssue = models.DateField(auto_now_add=True)
+    dateOfIssue = models.DateField(blank=True, null=True)
     returnDate = models.DateField(blank=True, null=True)
+    is_returned = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.student.last_name} {self.student.username[0].upper()}. - {self.book}'

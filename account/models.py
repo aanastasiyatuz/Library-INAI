@@ -7,8 +7,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 class MyUserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, password, **extra_fields):
-        user = self.model(**extra_fields)
+    def create_user(self, username, last_name, group, phone, password, **extra_fields):
+        if not username: raise ValueError('username is required')
+        if not last_name: raise ValueError('last_name is required')
+        if not group: raise ValueError('group is required')
+        if not phone: raise ValueError('phone is required')
+
+        user = self.model(username=username,last_name=last_name,group=group,phone=phone, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -25,21 +30,15 @@ class MyUserManager(BaseUserManager):
 class MyUser(AbstractUser):
     username = models.CharField(max_length=155, unique=True)
     last_name = models.CharField(max_length=155)
-    group = models.ForeignKey("Group", related_name="students", on_delete=models.DO_NOTHING)
+    group = models.CharField(max_length=50)
     phone = PhoneNumberField()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['last_name', 'group', 'phone']
+    REQUIRED_FIELDS = ['group']
 
     objects = MyUserManager()
 
     def __str__(self):
+        if self.is_superuser:
+            return f"{self.group}: {self.username}"
         return f'{self.group}: {self.last_name} {self.username[0].upper()}.'
-
-
-class Group(models.Model):
-    slug = models.CharField(max_length=100, primary_key=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = self.slug.upper()
-        return super().save(*args, **kwargs)

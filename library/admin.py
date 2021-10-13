@@ -1,3 +1,16 @@
 from django.contrib import admin
+from .models import Book, Order
 
-# Register your models here.
+
+class BookAdmin(admin.ModelAdmin):
+    list_display = ['title', 'book_id', 'is_available']
+    list_filter = ['title', "is_available"]
+
+admin.site.register(Book, BookAdmin)
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['student','book','is_returned']
+    list_filter = ['dateOfIssue', 'returnDate', "is_returned"]
+
+admin.site.register(Order, OrderAdmin)
