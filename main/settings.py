@@ -18,17 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # подключение rest
-    'rest_framework',
-    # подключение jwt авторизации
-    'rest_framework_simplejwt.token_blacklist',
-
     # подключение CORS
     'corsheaders',
-
-    # drf_yasg
-    'drf_yasg',
-
+    
     # apps
     'account',
     'library',
@@ -97,23 +89,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-REST_FRAMEWORK = {
-    # пагинаци
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-    'NON_FIELD_ERRORS_KEY': 'error',
-    # jwt авторизация
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-}
-
-import datetime
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=120),
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-}
 
 AUTH_USER_MODEL = 'account.MyUser'
