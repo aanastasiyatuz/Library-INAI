@@ -6,7 +6,7 @@ from .views import BookList, OrderList, BookDetail, BookCreate, OrderCreate, \
 urlpatterns = [
     path('', BookList.as_view(), name='books'),
     path('orders/', OrderList.as_view(), name='orders'),
-    path('book/<int:id>/', BookDetail.as_view(), name='book-detail'),
+    path('book/<int:id>/', BookDetail, name='book-detail'),
     path('create/book/', BookCreate.as_view(), name='create-book'),
     path('create/order/', OrderCreate.as_view(), name='create-order'),
     path('update/book/<int:id>/', BookUpdate.as_view(), name='update-book'),

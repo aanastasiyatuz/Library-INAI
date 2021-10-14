@@ -1,10 +1,10 @@
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
-from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
-from .models import Book, Order
-from .forms import BookForm, OrderForm
+from .models import Book, Order, Comment
+from .forms import BookForm, OrderForm, CommentForm
 from .permissions import IsAdminPermission
 
 User = get_user_model()
@@ -51,11 +51,19 @@ class OrderList(ListView):
 
 
 """--------DETAIL---------"""
-class BookDetail(DetailView):
-    model = Book
-    template_name = 'book-detail.html'
-    context_object_name = 'book'
-    pk_url_kwarg = 'id'
+def BookDetail(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    # all comments
+    comments = Comment.objects.filter(book=book)
+
+    # add comment
+    comment_form = CommentForm()
+    comment = comment_form.save(commit=False)
+    comment.student = request.user
+    comment.book = book
+
+    return render(request, 'book-detail.html', {'book':book, 'comment_form':comment, 'comments':comments})
 
 
 """--------CREATE---------"""
