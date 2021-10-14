@@ -8,6 +8,7 @@ class Book(models.Model):
     title = models.CharField(max_length=150)
     book_id = models.CharField(max_length=100)
     is_available = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='books')
 
     def get_average_rating(self):
         ratings = Rating.objects.filter(book=self)
