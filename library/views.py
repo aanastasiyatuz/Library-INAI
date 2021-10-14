@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
 from .models import Book, Order, Comment
-from .forms import BookForm, OrderForm, CommentForm
+from .forms import BookForm, OrderForm, CommentForm, RatingForm
 from .permissions import IsAdminPermission
 
 User = get_user_model()
@@ -63,7 +63,20 @@ def BookDetail(request, id):
     comment.student = request.user
     comment.book = book
 
-    return render(request, 'book-detail.html', {'book':book, 'comment_form':comment, 'comments':comments})
+    # rating
+    average_rating = book.get_average_rating()
+
+    # add rating
+    rating_form = RatingForm()
+    rating = rating_form.save(commit=False)
+    rating.student = request.user
+    rating.book = book
+
+    return render(request, 'book-detail.html', {'book':book, 
+                                                'comment_form':comment, 
+                                                'comments':comments, 
+                                                'rating_form':rating, 
+                                                'rating': average_rating})
 
 
 """--------CREATE---------"""
