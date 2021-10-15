@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title%}Title{% endblock %}
+{% block content %}
+
+<!-- BOOK INFO -->
+<div>
+    <h1>{{ book.title }}</h1>
+    <h3>{{ book.book_id }}</h3>
+    {% if book.is_available %}
+    <p style="color: green;">Available</p>
+    {% else %}
+    <p style="color: red;">Not available</p>
+    {% endif %}
+    <img src="{{ book.image.url }}">
+    <h3>
+        Rating: {{ book.get_average_rating }}
+    </h3>
+</div>
+
+<!-- ALL COMMENTS -->
+{% for comment in comments %}
+<h3>{{comment.student}}</h3>
+<h6>{{comment.date}}</h6>
+<p>{{comment.body}}</p>
+{% endfor %}
+
+<!-- ADD COMMENT -->
+<form method="post" enctype="multipart/form-data">
+ {{ comment_form.as_p }}
+ {% csrf_token %}
+ <button type="submit">Add comment</button>
+</form>
+
+<!-- ADD RATING -->
+<form method="post" enctype="multipart/form-data">
+ {{ rating_form.as_p }}
+ {% csrf_token %}
+ <button type="submit">Add rating</button>
+</form>
+
+{% endblock %}

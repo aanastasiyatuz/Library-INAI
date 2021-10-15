@@ -21,8 +21,8 @@ class Book(models.Model):
         return f"{' '.join([i.capitalize() for i in self.title.split()])} - [ {self.book_id} ]"
 
 class Order(models.Model):
-    student = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="orders")
-    book = models.OneToOneField(Book, related_name="order", on_delete=models.DO_NOTHING)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+    book = models.OneToOneField(Book, related_name="order", on_delete=models.CASCADE)
     dateOfIssue = models.DateField(blank=True, null=True)
     returnDate = models.DateField(blank=True, null=True)
     is_returned = models.BooleanField(default=False)
@@ -31,12 +31,12 @@ class Order(models.Model):
         return f'{self.student.last_name} {self.student.username[0].upper()}. - {self.book}'
 
 class Comment(models.Model):
-    student = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='comments')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
 class Rating(models.Model):
-    student = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='ratings')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='ratings')
     rating = models.PositiveIntegerField(choices=((1,1), (2,2), (3,3), (4,4), (5,5)))

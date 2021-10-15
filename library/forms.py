@@ -15,9 +15,21 @@ class OrderForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['body',]
+    
+    def save(self, request, book):
+        comment = self.instance
+        comment.student = request.user
+        comment.book = book
+        return super().save()
 
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
-        fields = '__all__'
+        fields = ['rating',]
+    
+    def save(self, request, book):
+        comment = self.instance
+        comment.student = request.user
+        comment.book = book
+        return super().save()
