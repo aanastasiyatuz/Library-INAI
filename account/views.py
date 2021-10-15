@@ -16,7 +16,17 @@ class RegisterView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('books')
     success_message = 'Successfully registered'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['registration_form'] = self.get_form(self.get_form_class())
+        return context
+
 class SignInView(LoginView):
     template_name = 'login.html'
     success_url = reverse_lazy('books')
     success_message = 'Successfully login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_form'] = self.get_form(self.get_form_class())
+        return context

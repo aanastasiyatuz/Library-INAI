@@ -6,7 +6,7 @@ User = get_user_model()
 
 class OrderInline(admin.TabularInline):
     model = Order
-    fields = ['book', 'dateOfIssue', 'returnDate']
+    fields = ['book', 'returnDate']
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['group', 'last_name']

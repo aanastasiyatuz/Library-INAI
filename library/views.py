@@ -2,10 +2,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
-from django.views.generic.detail import DetailView
 
 from .models import Book, Order, Comment
-from .forms import BookForm, OrderForm, CommentForm, RatingForm
+from .forms import BookForm, CommentForm, RatingForm
 from .permissions import IsAdminPermission
 
 User = get_user_model()
@@ -59,6 +58,12 @@ def BookDetail(request, id):
     comments = Comment.objects.filter(book=book)
 
     if request.method == "POST":
+        if len(request.POST) == 1:
+            Order.objects.create(student=request.user, book=book)
+            book.is_available = False
+            book.save()
+            return redirect(reverse_lazy('book-detail', kwargs={"id":id}))
+
         if request.POST.get("body"):
             # add comment
             comment_form = CommentForm(request.POST)
@@ -91,18 +96,10 @@ class BookCreate(CreateView):
     success_url = reverse_lazy('books')        
     permission_classes = [IsAdminPermission, ]
 
-class OrderCreate(CreateView):
-    model = Order
-    template_name = 'add-order.html'
-    form_class = OrderForm
-    success_url = reverse_lazy('orders')
-
-    def form_valid(self, form):
-        user = self.request.user
-        order = form.save(commit=False)
-        order.student = user
-        order.save()
-        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['book_form'] = self.get_form(self.get_form_class())
+        return context
 
 
 """--------UPDATE---------"""
@@ -114,26 +111,11 @@ class BookUpdate(UpdateView):
     pk_url_kwarg = 'id'
     permission_classes = [IsAdminPermission, ]
 
-class OrderUpdate(UpdateView):
-    model = Order
-    template_name = 'update-order.html'
-    form_class = OrderForm
-    success_url = 'orders.html'
-    pk_url_kwarg = 'id'
-    permission_classes = [IsAdminPermission, ]
-
 
 """--------DELETE---------"""
 class BookDelete(DeleteView):
     model = Book
     template_name = 'delete-book.html'
     success_url = reverse_lazy('books')
-    permission_classes = [IsAdminPermission, ]
-    pk_url_kwarg = 'id'
-
-class OrderDelete(DeleteView):
-    model = Order
-    template_name = 'delete-order.html'
-    success_url = reverse_lazy('orders')
     permission_classes = [IsAdminPermission, ]
     pk_url_kwarg = 'id'

@@ -23,7 +23,7 @@ class Book(models.Model):
 class Order(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     book = models.OneToOneField(Book, related_name="order", on_delete=models.CASCADE)
-    dateOfIssue = models.DateField(blank=True, null=True)
+    dateOfIssue = models.DateField(auto_now_add=True)
     returnDate = models.DateField(blank=True, null=True)
     is_returned = models.BooleanField(default=False)
 

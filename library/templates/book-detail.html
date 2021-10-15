@@ -38,4 +38,12 @@
  <button type="submit">Add rating</button>
 </form>
 
+<!-- ADD ORDER -->
+{% if book.is_available %}
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Take book</button>
+</form>
+{% endif %}
+
 {% endblock %}
