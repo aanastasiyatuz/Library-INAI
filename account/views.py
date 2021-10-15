@@ -1,10 +1,12 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import RegistrationForm
+from library.models import Book, Order
 
 User = get_user_model()
 
@@ -30,3 +32,14 @@ class SignInView(LoginView):
         context = super().get_context_data(**kwargs)
         context['login_form'] = self.get_form(self.get_form_class())
         return context
+
+def AdminView(request):
+    if not isinstance(request.user, User):
+        return redirect(reverse_lazy('login'))
+    if request.user.group.lower() != 'admin':
+        return redirect(reverse_lazy('books'))
+
+    orders = Order.objects.all()
+    books = Book.objects.all()
+
+    return render(request, 'admin.html', {'orders':orders, 'books':books})
