@@ -39,7 +39,7 @@ class MyUser(AbstractUser):
     phone = PhoneNumberField()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['usename', 'last_name', 'group']
+    REQUIRED_FIELDS = ['username', 'last_name', 'group']
 
     objects = MyUserManager()
 

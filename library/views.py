@@ -80,6 +80,8 @@ def BookDetail(request, id):
         comment_form = CommentForm()
         rating_form = RatingForm()
 
+    print(comment_form.as_p())
+
     return render(request, 'book-detail.html', {'book':book, 
                                                 'comment_form':comment_form, 
                                                 'comments':comments, 

@@ -26,16 +26,26 @@
 
 <!-- ADD COMMENT -->
 <form method="post" enctype="multipart/form-data">
- {{ comment_form.as_p }}
- {% csrf_token %}
+    <div class="mb-3">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+    </div>
  <button type="submit">Add comment</button>
 </form>
 
 <!-- ADD RATING -->
 <form method="post" enctype="multipart/form-data">
- {{ rating_form.as_p }}
+    <div>
+        <i class="far fa-star" id="star-1"></i>
+        <i class="far fa-star" id="star-2"></i>
+        <i class="far fa-star" id="star-3"></i>
+        <i class="far fa-star" id="star-4"></i>
+        <i class="far fa-star" id="star-5"></i>
+    </div>
+
+{{ rating_form.as_p }}
  {% csrf_token %}
- <button type="submit">Add rating</button>
+ <button type="submit" id="rating-button" hidden>Add rating</button>
 </form>
 
 <!-- ADD ORDER -->
@@ -45,5 +55,50 @@
     <button type="submit">Take book</button>
 </form>
 {% endif %}
+
+<script>
+    // bootstrap css
+    let comment_label = $("[for=\"id_body\"]")
+    comment_label.addClass("form-label")
+    let comment_textarea = $("textarea")
+    comment_textarea.addClass("form-control")
+    comment_textarea.css('width', 300)
+
+    let rating_label = $("[for=\"id_rating\"]")
+    rating_label.empty()
+
+
+    // RATING
+    let rating_button = $("#rating-button")
+    let rating = $("[name=\"rating\"]")
+    rating.prop('hidden', true)
+
+    let option1 = $("[value=\"1\"]")
+    let option2 = $("[value=\"2\"]")
+    let option3 = $("[value=\"3\"]")
+    let option4 = $("[value=\"4\"]")
+    let option5 = $("[value=\"5\"]")
+
+    let star1 = $("#star-1")
+    let star2 = $("#star-2")
+    let star3 = $("#star-3")
+    let star4 = $("#star-4")
+    let star5 = $("#star-5")
+
+    // animation
+    star1.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");})
+    star2.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");})
+    star3.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");})
+    star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
+    star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
+
+    star1.on("click", (e) => {option1.prop('selected', true);rating_button.click()})
+    star2.on("click", (e) => {option2.prop('selected', true);rating_button.click()})
+    star3.on("click", (e) => {option3.prop('selected', true);rating_button.click()})
+    star4.on("click", (e) => {option4.prop('selected', true);rating_button.click()})
+    star5.on("click", (e) => {option5.prop('selected', true);rating_button.click()})
+
+
+</script>
 
 {% endblock %}

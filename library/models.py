@@ -14,7 +14,7 @@ class Book(models.Model):
         ratings = Rating.objects.filter(book=self)
         if ratings:
             average = sum([r.rating for r in ratings]) / len(ratings)
-            return average
+            return round(average, 2)
         return 0
 
     def __str__(self):
