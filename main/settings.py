@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = 0
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.182.0.4',]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
 
     # подключение CORS
     'corsheaders',
-    
+
     # apps
     'account',
     'library',
