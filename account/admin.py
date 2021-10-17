@@ -10,8 +10,8 @@ class OrderInline(admin.TabularInline):
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['group', 'last_name']
-    list_filter = ['group','username', 'last_name']
-    fields = [('group', 'phone', 'username', 'last_name')]
+    list_filter = ['group','username', 'last_name', 'email']
+    fields = [('group', 'phone', 'username', 'last_name', 'email')]
     inlines = [OrderInline]
 
 admin.site.register(User, UserAdmin)
