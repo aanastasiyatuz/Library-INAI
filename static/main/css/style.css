@@ -58,3 +58,9 @@ body {
   margin-left: 20px;
   padding-bottom: 10px;
 }
+
+@media (min-width:768px){
+  #sign_block, #reg_block {
+    width: 50%;
+  }
+}
