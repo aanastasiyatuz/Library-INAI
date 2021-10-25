@@ -40,3 +40,6 @@ class Rating(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='ratings')
     rating = models.PositiveIntegerField(choices=((1,1), (2,2), (3,3), (4,4), (5,5)))
+
+    def __str__(self):
+        return str(self.rating)

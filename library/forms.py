@@ -24,7 +24,10 @@ class RatingForm(forms.ModelForm):
         fields = ['rating',]
     
     def save(self, request, book):
-        comment = self.instance
-        comment.student = request.user
-        comment.book = book
+        books = Rating.objects.filter(book=book)
+        if request.user in [book.student for book in books]:
+            obj = Rating.objects.get(book=book, student=request.user).delete()
+        rating = self.instance
+        rating.student = request.user
+        rating.book = book
         return super().save()

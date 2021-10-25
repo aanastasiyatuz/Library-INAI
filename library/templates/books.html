@@ -1,18 +1,62 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-{% for book in books %}
-<div>
-    <h1>{{ book.title }}</h1>
-    <h3>{{ book.book_id }}</h3>
-    {% if book.is_available %}
-    <p style="color: green;">Available</p>
-    {% else %}
-    <p style="color: red;">Not available</p>
-    {% endif %}
-    <img src="{{ book.image.url }}">
+<div class="my-site pb-3 pt-3" id='header'>
+    <!--Общий блок-->
+    <div class="container">
+        <!--Блок с шириной 1140 px и выравнивается по центру-->
+        <div class="row">
+            <!--Ряд внутри которых нужно распологать колонки-->
+            <div class="col-md-2">
+                <button type="button" class="btn mb-2 btn-lg" id="header_btn"
+                    onclick="document.location='books.html'">Books</button>
+            </div>
+            <!--Колонка-->
+            <div class="col-md-2">
+                <button type="button" class="btn mb-2 btn-lg" id="header_btn">Orders</button>
+            </div>
+            <!--Колонка-->
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn mb-2 btn-lg" id="header_btn"
+                    onclick="document.location='sign_in.html'">Log out</button>
+            </div>
+            <!--Колонка-->
+        </div>
+    </div>
 </div>
-{% endfor %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" placeholder="Search book" aria-label="Search book"
+                aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary text-white" type="button" id="button-search">Search</button>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row pb-3" id="list">
+        <div class="container mt-2">
+            {% for book in books %}
+                <div class="row pb-3 mx-auto mt-2" id="book">
+                    <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="..." style="width: 300px;height: auto;">
+                    <div class="row ml-2 mt-3 pr-3" id="name_book">
+                        <ul class="">
+                            <li class="mx-auto mb-3">
+                                <h3 class='text-white mt-3 ml-2'>Book: {{ book.title }}</h3>
+                            </li>
+                            <li class="mx-auto">
+                                <h3 class='text-white mt-3 ml-2'>Status: {{ book.is_available }}</h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}

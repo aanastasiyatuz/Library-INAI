@@ -44,6 +44,7 @@
     </div>
 
 {{ rating_form.as_p }}
+<p id="my_rating" hidden>{{my_rating}}</p>
  {% csrf_token %}
  <button type="submit" id="rating-button" hidden>Add rating</button>
 </form>
@@ -69,6 +70,7 @@
 
 
     // RATING
+    let my_rating = $("#my_rating").text()
     let rating_button = $("#rating-button")
     let rating = $("[name=\"rating\"]")
     rating.prop('hidden', true)
@@ -85,12 +87,41 @@
     let star4 = $("#star-4")
     let star5 = $("#star-5")
 
-    // animation
-    star1.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");})
-    star2.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");})
-    star3.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");})
-    star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
-    star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
+    // show my rating
+    if (my_rating){
+        if (my_rating === "1"){
+            star1.toggleClass("fas")
+        }
+        if (my_rating === "2"){
+            star1.toggleClass("fas")
+            star2.toggleClass("fas")
+        }
+        if (my_rating === "3"){
+            star1.toggleClass("fas")
+            star2.toggleClass("fas")
+            star3.toggleClass("fas")
+        }
+        if (my_rating === "4"){
+            star1.toggleClass("fas")
+            star2.toggleClass("fas")
+            star3.toggleClass("fas")
+            star4.toggleClass("fas")
+        }
+        if (my_rating === "5"){
+            star1.toggleClass("fas")
+            star2.toggleClass("fas")
+            star3.toggleClass("fas")
+            star4.toggleClass("fas")
+            star5.toggleClass("fas")
+        }
+    }
+
+    // // animation
+    // star1.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");})
+    // star2.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");})
+    // star3.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");})
+    // star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
+    // star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
 
     star1.on("click", (e) => {option1.prop('selected', true);rating_button.click()})
     star2.on("click", (e) => {option2.prop('selected', true);rating_button.click()})

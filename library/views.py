@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
-from .models import Book, Order, Comment
+from .models import Book, Order, Comment, Rating
 from .forms import BookForm, CommentForm, RatingForm
 from .permissions import IsAdminPermission
 
@@ -54,6 +54,8 @@ def BookDetail(request, id):
 
     # all comments
     comments = Comment.objects.filter(book=book)
+    my_rating_list = Rating.objects.filter(book=book, student=request.user)
+    my_rating = my_rating_list[0] if my_rating_list else None
 
     if request.method == "POST":
         if len(request.POST) == 1:
@@ -83,7 +85,8 @@ def BookDetail(request, id):
     return render(request, 'book-detail.html', {'book':book, 
                                                 'comment_form':comment_form, 
                                                 'comments':comments, 
-                                                'rating_form':rating_form})
+                                                'rating_form':rating_form,
+                                                'my_rating':my_rating})
 
 
 """--------CREATE---------"""
