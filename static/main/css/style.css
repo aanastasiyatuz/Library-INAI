@@ -30,6 +30,13 @@ body {
   font-size: 20px;
 }
 
+#create-akk {
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
 .btn {
   background-color:#4995ad;
   color: white;
@@ -63,4 +70,31 @@ body {
   #sign_block, #reg_block {
     width: 50%;
   }
+}
+
+#header, #button-search, #list, #name_book, li {
+  background-color:#4995ad;
+}
+
+#header_btn, #comment {
+
+  background-color:#0E566C;
+}
+
+#book, #info {
+  background-color: #61A6BC;
+}
+
+img {
+  height:   600px;
+}
+
+#big-p {
+  font-size: 40px;
+}
+
+#scroll {
+  overflow-y: scroll;
+  background-color:#61A6BC;
+  height: 400px;
 }

@@ -1,12 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div class="my-site pb-3 pt-3" id='header'>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-4 justify-content-between">
+                    <button type="submit" class="btn btn-lg mx-auto mb-2" id="header_btn"
+                        onclick="document.location='books.html'">Books</button>
+                    <button type="submit" class="btn btn-lg mx-auto mb-2" id="header_btn">Orders</button>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-lg float-right mb-2" id="header_btn"
+                        onclick="document.location='sign_in.html'">Log out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 rounded mb-3" id='list'>
+        <div class="row mx-auto pb-3">
+            <div class="col mt-5">
+                <img src="foto/512.jpeg" alt="..." class="rounded mx-auto d-block">
+            </div>
+            <div class="col mt-5 rounded mx-3 d-block" id='info'>
+                <h1 class='text-white text-center mt-5'>Book-name</h1>
+                <h3 class="text-white mt-5 text-center">Book-id</h3>
+                <p class="text-white mt-5 text-center" id='big-p'>Status</p>
+                <p class='text-center text-white' id='big-p'>Rating: 5.00</p>
+                <p class='text-white text-center' id='big-p'>*stars*</p>
+            </div>
+        </div>
+        <div class="row mx-auto pb-3">
+            <div class="col mt-5">
+                <div class="d-flex justify-content-center">
+                    <div class="row text-center justify-content-center" id=''>
+                        <div class="mb-3" id=''>
+                            <a class="btn btn-lg mx-auto px-5 pt-3
+                            pb-3" href="" role="button" id="cr">Take a book</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col mt-5">
+            <h1 class='text-white form-label text-center' for='scroll'>Comments</h1>
+            <div class="row mx-5 rounded pb-2" id='scroll'>
+                <div class="col mt-5">
+                    <div class="container">
+                        <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>Student_name</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>00.00.0000</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='text-white text-center'>gfhfgh hgf hgf gf dgfd gf dfgfd g gfdfdsf fsd
+                                        fdsfsf
+                                        sdfs
+                                        af sffd g dsgdfgfdsgfgd gfd
+                                        gfgfd dfg fdgdsg fdg gfd</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>Student_name</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>00.00.0000</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='text-white text-center'>gfhfgh hgf hgf gf dgfd gf dfgfd g gfdfdsf fsd
+                                        fdsfsf
+                                        sdfs
+                                        af sffd g dsgdfgfdsgfgd gfd
+                                        gfgfd dfg fdgdsg fdg gfd</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>Student_name</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>00.00.0000</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='text-white text-center'>gfhfgh hgf hgf gf dgfd gf dfgfd g gfdfdsf fsd
+                                        fdsfsf
+                                        sdfs
+                                        af sffd g dsgdfgfdsgfgd gfd
+                                        gfgfd dfg fdgdsg fdg gfd</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>Student_name</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>00.00.0000</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='text-white text-center'>gfhfgh hgf hgf gf dgfd gf dfgfd g gfdfdsf fsd
+                                        fdsfsf
+                                        sdfs
+                                        af sffd g dsgdfgfdsgfgd gfd
+                                        gfgfd dfg fdgdsg fdg gfd</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>Student_name</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>00.00.0000</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class='text-white text-center'>gfhfgh hgf hgf gf dgfd gf dfgfd g gfdfdsf fsd
+                                        fdsfsf
+                                        sdfs
+                                        af sffd g dsgdfgfdsgfgd gfd
+                                        gfgfd dfg fdgdsg fdg gfd</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-3 pb-3 mt-5 justify-content-center">
+            <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Add comment</h1>
+            <textarea class="form-control mx-5" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <div class="col mt-4 mx-5">
+                <button type="submit" class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt">Add</button>
+            </div>
+        </div>
+
+
 </body>
+
 </html>
