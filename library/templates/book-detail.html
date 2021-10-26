@@ -2,68 +2,113 @@
 {% block title%}Title{% endblock %}
 {% block content %}
 
-<!-- BOOK INFO -->
-<div>
-    <h1>{{ book.title }}</h1>
-    <h3>{{ book.book_id }}</h3>
-    {% if book.is_available %}
-    <p style="color: green;">Available</p>
-    {% else %}
-    <p style="color: red;">Not available</p>
-    {% endif %}
-    <img src="{{ book.image.url }}">
-    <h3>
-        Rating: {{ book.get_average_rating }}
-    </h3>
+
+<div class="container mt-5 rounded mb-3" id='list'>
+    <!-- INFO -->
+    <div class="row mx-auto pb-3">
+        <div class="col mt-5">
+            <img src="{{ book.image.url }}" alt="..." class="rounded mx-auto d-block">
+        </div>
+        <div class="col mt-5 rounded mx-3 d-block" id='info'>
+            <h1 class='text-white text-center mt-5'>{{ book.title }}</h1>
+            <h3 class="text-white mt-5 text-center">{{ book.book_id }}</h3>
+
+            {% if book.is_available %}
+            <p class="text-white mt-5 text-center" id='big-p'>Available</p>
+            {% else %}
+            <p class="text-white mt-5 text-center" id='big-p'>Not available</p>
+            {% endif %}
+
+            <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
+            <!-- ADD RATING -->
+                <form method="post" enctype="multipart/form-data" class="col text-center">
+                    <div>
+                        <i class="far fa-star" id="star-1"></i>
+                        <i class="far fa-star" id="star-2"></i>
+                        <i class="far fa-star" id="star-3"></i>
+                        <i class="far fa-star" id="star-4"></i>
+                        <i class="far fa-star" id="star-5"></i>
+                    </div>
+
+                    {{ rating_form.as_p }}
+                    <p id="my_rating" hidden>{{ my_rating }}</p>
+                    {% csrf_token %}
+                    <button type="submit" id="rating-button" hidden></button>
+                </form>
+        </div>
+    </div> 
+
+    <!-- TAKE -->
+        {% if book.is_available %}
+        <form method="post">
+            <div class="row mx-auto pb-3">
+                <div class="col mt-5">
+                    <div class="d-flex justify-content-center">
+                        <div class="row text-center justify-content-center" id=''>
+                            <div class="mb-3" id=''>
+                                {% csrf_token %}
+                                <button class="btn btn-lg mx-auto px-5 pt-3
+                                pb-3" type="submit" id="cr">Take book</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+    <!-- COMMENTS -->
+    <div class="col mt-5">
+        <h1 class='text-white form-label text-center' for='scroll'>Comments</h1>
+        <div class="row mx-5 rounded pb-2" id='scroll'>
+            <div class="col mt-5">
+                <div class="container">
+                    <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                        {% for comment in comments %}
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class='text-white'>{{ comment.student }}</h3>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>{{ comment.date }}</h6>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col float-right">
+                                    <h6 class='float-right text-white'>{{ comment.body }}</h6>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-3 pb-3 mt-5 justify-content-center">
+        <!-- ADD COMMENT -->
+        <form method="post" enctype="multipart/form-data">
+            <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Add comment</h1>
+            <div class="mb-3">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+            </div>
+            <div class="col mt-4 text-center">
+                <button class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt" type="submit">Add comment</button>
+            </div>
+        </form>
+    </div>
 </div>
-
-<!-- ALL COMMENTS -->
-{% for comment in comments %}
-<h3>{{comment.student}}</h3>
-<h6>{{comment.date}}</h6>
-<p>{{comment.body}}</p>
-{% endfor %}
-
-<!-- ADD COMMENT -->
-<form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        {{ comment_form.as_p }}
-        {% csrf_token %}
-    </div>
- <button type="submit">Add comment</button>
-</form>
-
-<!-- ADD RATING -->
-<form method="post" enctype="multipart/form-data">
-    <div>
-        <i class="far fa-star" id="star-1"></i>
-        <i class="far fa-star" id="star-2"></i>
-        <i class="far fa-star" id="star-3"></i>
-        <i class="far fa-star" id="star-4"></i>
-        <i class="far fa-star" id="star-5"></i>
-    </div>
-
-{{ rating_form.as_p }}
-<p id="my_rating" hidden>{{my_rating}}</p>
- {% csrf_token %}
- <button type="submit" id="rating-button" hidden>Add rating</button>
-</form>
-
-<!-- ADD ORDER -->
-{% if book.is_available %}
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Take book</button>
-</form>
-{% endif %}
 
 <script>
     // bootstrap css
     let comment_label = $("[for=\"id_body\"]")
-    comment_label.addClass("form-label")
+    comment_label.remove()
     let comment_textarea = $("textarea")
     comment_textarea.addClass("form-control")
-    comment_textarea.css('width', 300)
+    comment_textarea.prop("rows", "5")
+    comment_textarea.prop("id", "exampleFormControlTextarea1")
 
     let rating_label = $("[for=\"id_rating\"]")
     rating_label.empty()
