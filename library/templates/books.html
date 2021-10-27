@@ -12,6 +12,8 @@
         </form>
     </div>
 </div>
+<input type="checkbox" id="checkbox_available">
+<label for="checkbox_available">Only available</label>
 <div class="container mt-5">
     {% for book in books %}
         <div class="row pb-3" id="list">
@@ -40,5 +42,8 @@
         </div>
     {% endfor %}
 </div>
-
-{% endblock %}
+<script>
+    let checkbox = $("#checkbox_available");
+    checkbox.on('click', (e)=>{window.location.href = "http://127.0.0.1:8000/library?q=available"})
+</script>
+{% endblock %}  

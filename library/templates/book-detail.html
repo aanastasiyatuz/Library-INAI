@@ -21,6 +21,7 @@
 
             <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
             <!-- ADD RATING -->
+                {% if request.user.is_authenticated %}
                 <form method="post" enctype="multipart/form-data" class="col text-center">
                     <div>
                         <i class="far fa-star" id="star-1"></i>
@@ -35,6 +36,17 @@
                     {% csrf_token %}
                     <button type="submit" id="rating-button" hidden></button>
                 </form>
+                {% else %}
+                <div class="col text-center">
+                    <div>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+                {% endif %}
         </div>
     </div> 
 
@@ -86,6 +98,7 @@
             </div>
         </div>
     </div>
+    {% if request.user.is_authenticated %}
     <div class="row mx-3 pb-3 mt-5 justify-content-center">
         <!-- ADD COMMENT -->
         <form method="post" enctype="multipart/form-data">
@@ -99,6 +112,7 @@
             </div>
         </form>
     </div>
+    {% endif %}
 </div>
 
 <script>
