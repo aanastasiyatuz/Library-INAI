@@ -14,34 +14,36 @@
 </div>
 <input type="checkbox" id="checkbox_available">
 <label for="checkbox_available">Only available</label>
-<div class="container mt-5">
-    {% for book in books %}
-        <div class="row pb-3" id="list">
-            <div class="container mt-2">
-                <a href="{% url 'book-detail' book.id %}">
-                    <div class="row pb-3 mx-auto mt-2" id="book">
-                        <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="...">
-                        <div class="row ml-2 mt-3 pr-3" id="name_book">
+
+
+{% for book in books %}
+<div class="container mt-5" style="width:1000px">
+    <div class="row pb-3" id="list">
+        <div class="container mt-2">
+            <a href="{% url 'book-detail' book.id %}">
+                <div class="row pb-3 mx-auto mt-2" id="book">
+                    <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="...">
+                    <div class="row ml-2 mt-3 pr-3" id="name_book">
                         <ul class="">
-                            <li class="mx-auto mb-3">
-                                <h3 class='text-white mt-3 ml-2'>Book: {{ book.title }}</h3>
-                            </li>
-                            {% if book.is_available %}
-                            <li class="mx-auto">
-                                <h3 class='text-white mt-3 ml-2'>Status: available</h3>
-                            </li>
-                            {% else %}
-                            <li class="mx-auto">
-                                <h3 class='text-white mt-3 ml-2'>Status: not available</h3>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </a>
-            </div>
+                        <li class="mx-auto mb-3">
+                            <h3 class='text-white mt-3 ml-2'>Book: {{ book.title }}</h3>
+                        </li>
+                        {% if book.is_available %}
+                        <li class="mx-auto">
+                            <h3 class='text-white mt-3 ml-2'>Status: available</h3>
+                        </li>
+                        {% else %}
+                        <li class="mx-auto">
+                            <h3 class='text-white mt-3 ml-2'>Status: not available</h3>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </a>
         </div>
-    {% endfor %}
+    </div>
 </div>
+{% endfor %}
 <script>
     let checkbox = $("#checkbox_available");
     checkbox.on('click', (e)=>{

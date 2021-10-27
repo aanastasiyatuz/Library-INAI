@@ -66,12 +66,6 @@ body {
   padding-bottom: 10px;
 }
 
-@media (min-width:768px){
-  #sign_block, #reg_block {
-    width: 50%;
-  }
-}
-
 #header, #button-search, #list, #name_book, li {
   background-color:#4995ad;
 }
@@ -97,4 +91,10 @@ img {
   overflow-y: scroll;
   background-color:#61A6BC;
   height: 400px;
+}
+
+@media (min-width:768px){
+  #sign_block, #reg_block {
+    width: 50%;
+  }
 }

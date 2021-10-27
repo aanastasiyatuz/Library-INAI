@@ -35,7 +35,11 @@
                 {% endif %}
                 <!--Колонка-->
                 <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
+                {% if request.user.group == 'admin' %}
+                <div class="col-md-2">
+                    <a class="btn mb-2 btn-lg" id="header_btn" href="{% url 'create-book' %}"><i class="far fa-plus-square"></i></a>
+                </div>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
