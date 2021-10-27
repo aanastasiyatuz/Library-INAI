@@ -44,6 +44,8 @@
 </div>
 <script>
     let checkbox = $("#checkbox_available");
-    checkbox.on('click', (e)=>{window.location.href = "http://127.0.0.1:8000/library?q=available"})
+    checkbox.on('click', (e)=>{
+        window.location.href += "?q=available"
+        })
 </script>
 {% endblock %}  
