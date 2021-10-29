@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{% block title%}Title{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block title%}Title{% endblock %} {% block content %}
 
 
 <div class="container mt-5 rounded mb-3" id='list'>
@@ -21,53 +19,53 @@
 
             <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
             <!-- ADD RATING -->
-                {% if request.user.is_authenticated %}
-                <form method="post" enctype="multipart/form-data" class="col text-center">
-                    <div>
-                        <i class="far fa-star" id="star-1"></i>
-                        <i class="far fa-star" id="star-2"></i>
-                        <i class="far fa-star" id="star-3"></i>
-                        <i class="far fa-star" id="star-4"></i>
-                        <i class="far fa-star" id="star-5"></i>
-                    </div>
-
-                    {{ rating_form.as_p }}
-                    <p id="my_rating" hidden>{{ my_rating }}</p>
-                    {% csrf_token %}
-                    <button type="submit" id="rating-button" hidden></button>
-                </form>
-                {% else %}
-                <div class="col text-center">
-                    <div>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
+            {% if request.user.is_authenticated %}
+            <form method="post" enctype="multipart/form-data" class="col text-center">
+                <div>
+                    <i class="far fa-star" id="star-1"></i>
+                    <i class="far fa-star" id="star-2"></i>
+                    <i class="far fa-star" id="star-3"></i>
+                    <i class="far fa-star" id="star-4"></i>
+                    <i class="far fa-star" id="star-5"></i>
                 </div>
-                {% endif %}
+
+                {{ rating_form.as_p }}
+                <p id="my_rating" hidden>{{ my_rating }}</p>
+                {% csrf_token %}
+                <button type="submit" id="rating-button" hidden></button>
+            </form>
+            {% else %}
+            <div class="col text-center">
+                <div>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            {% endif %}
         </div>
-    </div> 
+    </div>
 
     <!-- TAKE -->
-        {% if book.is_available %}
-        <form method="post">
-            <div class="row mx-auto pb-3">
-                <div class="col mt-5">
-                    <div class="d-flex justify-content-center">
-                        <div class="row text-center justify-content-center" id=''>
-                            <div class="mb-3" id=''>
-                                {% csrf_token %}
-                                <button class="btn btn-lg mx-auto px-5 pt-3
+    {% if book.is_available %}
+    <form method="post">
+        <div class="row mx-auto pb-3">
+            <div class="col mt-5">
+                <div class="d-flex justify-content-center">
+                    <div class="row text-center justify-content-center" id=''>
+                        <div class="mb-3" id=''>
+                            {% csrf_token %}
+                            <button class="btn btn-lg mx-auto px-5 pt-3
                                 pb-3" type="submit" id="cr">Take book</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-        {% endif %}
+        </div>
+    </form>
+    {% endif %}
 
     <!-- COMMENTS -->
     <div class="col mt-5">
@@ -75,25 +73,25 @@
         <div class="row mx-5 rounded pb-2" id='scroll'>
             <div class="col mt-5">
                 <div class="container">
+                    {% for comment in comments %}
                     <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
-                        {% for comment in comments %}
-                            <div class="row">
-                                <div class="col">
-                                    <h3 class='text-white'>{{ comment.student }}</h3>
-                                </div>
+                        <div class="row">
+                            <div class="col">
+                                <h3 class='text-white'>{{ comment.student }}</h3>
                             </div>
-                            <div class="row ">
-                                <div class="col float-right">
-                                    <h6 class='float-right text-white'>{{ comment.date }}</h6>
-                                </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col float-right">
+                                <h6 class='float-right text-white'>{{ comment.date }}</h6>
                             </div>
-                            <div class="row ">
-                                <div class="col float-right">
-                                    <h6 class='float-right text-white'>{{ comment.body }}</h6>
-                                </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col float-right">
+                                <h6 class='float-right text-white'>{{ comment.body }}</h6>
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -103,9 +101,8 @@
         <!-- ADD COMMENT -->
         <form method="post" enctype="multipart/form-data">
             <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Add comment</h1>
-            <div class="mb-3">
-                {{ comment_form.as_p }}
-                {% csrf_token %}
+            <div class="mb-3 mx-5">
+                {{ comment_form.as_p }} {% csrf_token %}
             </div>
             <div class="col mt-4 text-center">
                 <button class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt" type="submit">Add comment</button>
@@ -147,26 +144,26 @@
     let star5 = $("#star-5")
 
     // show my rating
-    if (my_rating){
-        if (my_rating === "1"){
+    if (my_rating) {
+        if (my_rating === "1") {
             star1.toggleClass("fas")
         }
-        if (my_rating === "2"){
+        if (my_rating === "2") {
             star1.toggleClass("fas")
             star2.toggleClass("fas")
         }
-        if (my_rating === "3"){
+        if (my_rating === "3") {
             star1.toggleClass("fas")
             star2.toggleClass("fas")
             star3.toggleClass("fas")
         }
-        if (my_rating === "4"){
+        if (my_rating === "4") {
             star1.toggleClass("fas")
             star2.toggleClass("fas")
             star3.toggleClass("fas")
             star4.toggleClass("fas")
         }
-        if (my_rating === "5"){
+        if (my_rating === "5") {
             star1.toggleClass("fas")
             star2.toggleClass("fas")
             star3.toggleClass("fas")
@@ -182,13 +179,26 @@
     // star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
     // star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
 
-    star1.on("click", (e) => {option1.prop('selected', true);rating_button.click()})
-    star2.on("click", (e) => {option2.prop('selected', true);rating_button.click()})
-    star3.on("click", (e) => {option3.prop('selected', true);rating_button.click()})
-    star4.on("click", (e) => {option4.prop('selected', true);rating_button.click()})
-    star5.on("click", (e) => {option5.prop('selected', true);rating_button.click()})
-
-
+    star1.on("click", (e) => {
+        option1.prop('selected', true);
+        rating_button.click()
+    })
+    star2.on("click", (e) => {
+        option2.prop('selected', true);
+        rating_button.click()
+    })
+    star3.on("click", (e) => {
+        option3.prop('selected', true);
+        rating_button.click()
+    })
+    star4.on("click", (e) => {
+        option4.prop('selected', true);
+        rating_button.click()
+    })
+    star5.on("click", (e) => {
+        option5.prop('selected', true);
+        rating_button.click()
+    })
 </script>
 
 {% endblock %}
