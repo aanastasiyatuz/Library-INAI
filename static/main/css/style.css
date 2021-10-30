@@ -101,13 +101,13 @@ img {
     height: 400px;
 }
 
-#star {
-    width: 20px;
-}
-
 @media (min-width:995px) {
     #sign_block,
     #reg_block {
         width: 50%;
     }
+}
+
+rating {
+    width: 50px;
 }
