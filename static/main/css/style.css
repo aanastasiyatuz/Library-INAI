@@ -7,7 +7,7 @@ body {
     font-size: 100px;
 }
 
-#sign_block {
+#sign_block, #add_block {
     background-color: #4995ad;
     border-radius: 12px;
     margin-top: 60px;
@@ -93,6 +93,10 @@ img {
 
 #big-p {
     font-size: 40px;
+}
+
+#add_book_btn {
+    background-color:limegreen
 }
 
 #scroll {
