@@ -1,100 +1,113 @@
 body {
-  background-color: #5FBCDA !important;
+    background-color: #5FBCDA !important;
 }
 
-#sign, #reg {
-  font-size: 100px;
+#sign,
+#reg {
+    font-size: 100px;
 }
 
 #sign_block {
-  background-color: #4995ad;
-  border-radius: 12px;
-  margin-top: 60px;
-  padding-top: 20px;
-  padding-left: 60px;
-  padding-right: 60px;
+    background-color: #4995ad;
+    border-radius: 12px;
+    margin-top: 60px;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 #input {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 #bt {
-  margin-bottom: 20px;
+    background-color: green;
+    margin-bottom: 20px;
 }
 
 #cr {
-  padding-left: 80px;
-  padding-right: 80px;
-  margin-top: 20px;
-  font-size: 20px;
+    padding-left: 130px!important;
+    padding-right: 130px!important;
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: limegreen;
 }
 
 #create-akk {
-  padding-left: 80px;
-  padding-right: 80px;
-  margin-top: 20px;
-  font-size: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .btn {
-  background-color:#4995ad;
-  color: white;
+    background-color: #4995ad;
+    color: white;
 }
 
 #tx {
-  font-size: 20px;
-  margin-right: 100px;
+    font-size: 20px;
+    margin-right: 100px;
 }
 
 #reg_block {
-  background-color: #4995ad;
-  border-radius: 12px;
-  margin-top: 60px;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
+    background-color: #4995ad;
+    border-radius: 12px;
+    margin-top: 60px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 #gr {
-  margin-right: 200px;
+    margin-right: 200px;
 }
 
 #reg_btn {
-  margin-left: 20px;
-  padding-bottom: 10px;
+    margin-left: 20px;
+    padding-bottom: 10px;
 }
 
-#header, #button-search, #list, #name_book, li {
-  background-color:#4995ad;
+#header,
+#button-search,
+#list,
+#name_book,
+li {
+    background-color: #4995ad;
 }
 
-#header_btn, #comment {
-
-  background-color:#0E566C;
+#header_btn,
+#comment {
+    background-color: #0E566C;
 }
 
-#book, #info {
-  background-color: #61A6BC;
+#book,
+#info {
+    background-color: #61A6BC;
 }
 
 img {
-  height:   600px;
+    height: 600px;
 }
 
 #big-p {
-  font-size: 40px;
+    font-size: 40px;
 }
 
 #scroll {
-  overflow-y: scroll;
-  background-color:#61A6BC;
-  height: 400px;
+    overflow-y: scroll;
+    background-color: #61A6BC;
+    height: 400px;
 }
 
-@media (min-width:768px){
-  #sign_block, #reg_block {
-    width: 50%;
-  }
+@media (min-width:995px) {
+    #sign_block,
+    #reg_block {
+        width: 50%;
+    }
+}
+
+rating {
+    width: 50px;
 }

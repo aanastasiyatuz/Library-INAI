@@ -1,13 +1,10 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="container mt-5">
     <div class="row">
 
         <form class="input-group mb-4" method="get" action="{% url 'books' %}">
-            <input name="q" type="search" class="form-control" placeholder="Search book" aria-label="Search book"
-                aria-describedby="button-addon2">
+            <input name="q" type="search" class="form-control" placeholder="Search book" aria-label="Search book" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary text-white" type="submit" id="button-search">Search</button>
         </form>
     </div>
@@ -15,39 +12,47 @@
 <input type="checkbox" id="checkbox_available">
 <label for="checkbox_available">Only available</label>
 
-
-{% for book in books %}
 <div class="container mt-5" style="width:1000px">
-    <div class="row pb-3" id="list">
-        <div class="container mt-2">
-            <a href="{% url 'book-detail' book.id %}">
-                <div class="row pb-3 mx-auto mt-2" id="book">
-                    <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="...">
-                    <div class="row ml-2 mt-3 pr-3" id="name_book">
-                        <ul class="">
-                        <li class="mx-auto mb-3">
-                            <h3 class='text-white mt-3 ml-2'>Book: {{ book.title }}</h3>
-                        </li>
-                        {% if book.is_available %}
-                        <li class="mx-auto">
-                            <h3 class='text-white mt-3 ml-2'>Status: available</h3>
-                        </li>
-                        {% else %}
-                        <li class="mx-auto">
-                            <h3 class='text-white mt-3 ml-2'>Status: not available</h3>
-                        </li>
-                        {% endif %}
-                    </ul>
+    <div class="row pb-3 rounded" id="list">
+        <div class="container mt-4">
+            {% for book in books %}
+            <div class="row pb-3 mx-auto mb-4 rounded" id="book">
+                <div class="col">
+                    <a href="{% url 'book-detail' book.id %}">
+                        <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="..." width="450">
+                    </a>
                 </div>
-            </a>
+                <div class="col mx-auto">
+                    <div class="row mx-3 mt-3 px-4 rounded" id="name_book">
+                        <ul class="">
+                            <li class="mx-auto mb-3">
+                                <h3 class='text-white mt-3 ml-2'>Book: {{ book.title }}</h3>
+                            </li>
+                            {% if book.is_available %}
+                            <li class="mx-auto">
+                                <h3 class='text-white mt-3 ml-2'>Status: <span style="color: rgb(27, 165, 27);">available</span></h3>
+                            </li>
+                            {% else %}
+                            <li class="mx-auto">
+                                <h3 class='text-white mt-3 ml-2'>Status: <span style="color: rgb(148, 29, 29);">not available</span></h3>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="row text-center justify-content-center">
+                        <div class="mb-3" id='create'>
+                            <a class="btn btn-lg" href="{% url 'book-detail' book.id %}" role="button" id="create-akk">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
-{% endfor %}
-<script>
-    let checkbox = $("#checkbox_available");
-    checkbox.on('click', (e)=>{
-        window.location.href += "?q=available"
+    <script>
+        let checkbox = $("#checkbox_available");
+        checkbox.on('click', (e) => {
+            window.location.href += "?q=available"
         })
-</script>
-{% endblock %}  
+    </script>
+    {% endblock %}

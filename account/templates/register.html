@@ -1,25 +1,21 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block title%}Sign Up{% endblock %} {% block content %}
 
-{% block title%}Sign Up{% endblock %}
-{% block content %}
-
-<div class="d-flex justify-content-center mt-5" id="reg">Sign up</div>
-    <div class="container">
-        <div class="mb-3" id="reg_block">
-            <form class="row g-3" method="post" enctype="multipart/form-data">
-                    <div hidden>
-                        {{ registration_form.as_p }}
-                    </div>
-                    {% csrf_token %}
-                <div id="email"></div>
-                <div class="col-md-6" id="username"></div>
-                <div class="col-md-6" id="last_name"></div>
-                <div class="col-md-6" id="group"></div>
-                <div class="col-md-6" id="phone"></div>
-                <div class="col-md-6" id="password"></div>
-                <div class="col-md-6" id="password_confirm"></div>
-                <!-- <div class="col-md-6">
+<div class="d-flex justify-content-center mt-5 text-white" id="reg">Sign up</div>
+<div class="container">
+    <div class="mb-3 mx-auto" id="reg_block">
+        <form class="row g-3 text-white" method="post" enctype="multipart/form-data">
+            <div hidden>
+                {{ registration_form.as_p }}
+            </div>
+            {% csrf_token %}
+            <div id="email"></div>
+            <div class="col-md-6" id="username"></div>
+            <div class="col-md-6" id="last_name"></div>
+            <div class="col-md-6" id="group"></div>
+            <div class="col-md-6" id="phone"></div>
+            <div class="col-md-6" id="password"></div>
+            <div class="col-md-6" id="password_confirm"></div>
+            <!-- <div class="col-md-6">
                     <label for="" class="form-label">Select group</label>
                     <select class="custom-select" id="gr">
                         <option selected>AIN-1-21</option>
@@ -44,20 +40,20 @@
                         <option value="3">WIN-18</option>
                     </select>
                 </div> -->
-                <div class="invalid-feedback" hidden>
+            <div class="invalid-feedback" hidden>
 
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg px-5" id="bt" style="width: 98%; margin-left: 1%;">Create an account</button>
-            </form>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="row text-center justify-content-center">
-                <div class="mb-3" id='create'>
-                    <a class="btn btn-lg" href="{% url 'login' %}" role="button" id="cr">Log in</a>
-                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg px-5" id="bt" style="width: 98%; margin-left: 1%;">Create an account</button>
+        </form>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="row text-center justify-content-center">
+            <div class="mb-3" id='create'>
+                <a class="btn btn-lg" href="{% url 'login' %}" role="button" id="create-akk">Log in</a>
             </div>
         </div>
     </div>
+</div>
 
 
 <script>
@@ -120,18 +116,17 @@
     group_input.addClass("form-control")
     phone_input.addClass("form-control")
     password_input.addClass("form-control")
-    password_cofirmation_input.addClass("form-control")    
+    password_cofirmation_input.addClass("form-control")
 
     //errors
     errors_div = $(".invalid-feedback")
     console.log(errors_div)
     errors = $(".errorlist")
-    if (errors.length){
+    if (errors.length) {
         errors_div.prop("hidden", false)
-        for (let count = 0; count != errors.length; count++){
+        for (let count = 0; count != errors.length; count++) {
             console.log(errors.get(count))
         }
     }
-    
 </script>
 {% endblock %}
