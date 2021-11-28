@@ -20,6 +20,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     "checking-sending-emails": {
         "task": "library.tasks.check_and_send_email",
-        "schedule": 10.0
+        "schedule": 20.0
     }
 }

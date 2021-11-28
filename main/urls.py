@@ -19,4 +19,4 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # sudo systemctl restart gunicorn
 
 # celery -A main beat
-# celery -A main worker -l INFO
+# celery -A main worker -l INFO --pool=solo
