@@ -17,7 +17,7 @@ admin.site.register(Book, BookAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['student','book','is_returned']
+    list_display = ['student','book','is_returned','dateOfIssue', 'returnDate']
     list_filter = ['dateOfIssue', 'returnDate', "is_returned"]
 
 admin.site.register(Order, OrderAdmin)

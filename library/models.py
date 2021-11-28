@@ -28,6 +28,12 @@ class Order(models.Model):
     is_returned = models.BooleanField(default=False)
 
     def __str__(self):
+        if self.returnDate:
+            if not self.is_returned:
+                self.is_returned = True
+            if not self.book.is_available:
+                self.book.is_available = True
+    
         return f'{self.student.last_name} {self.student.username[0].upper()}. - {self.book}'
 
 class Comment(models.Model):
