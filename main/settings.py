@@ -1,4 +1,5 @@
 import os
+import celery
 from decouple import config
 from pathlib import Path
 
