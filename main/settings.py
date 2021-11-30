@@ -1,4 +1,5 @@
 import os
+import celery
 from decouple import config
 from pathlib import Path
 
@@ -8,7 +9,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.182.0.4', '34.125.69.210', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,6 +25,10 @@ INSTALLED_APPS = [
     # apps
     'account',
     'library',
+
+    # celery
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -95,3 +100,19 @@ AUTH_USER_MODEL = 'account.MyUser'
 LOGIN_REDIRECT_URL = '/library/'
 LOGIN_URL = '/account/login/'
 LOGOUT_REDIRECT_URL = '/library/'
+
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL, EMAIL_HOST_USER = config('EMAIL_HOST_USER'), config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS   = True
+ACTIVATE_USERS_EMAIL = True
+
+# celery
+CELERY_TIMEZONE = "Asia/Almaty"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
