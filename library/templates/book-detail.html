@@ -45,6 +45,27 @@
                 </div>
             </div>
             {% endif %}
+            <!-- DELETE -->
+            {% if request.user.is_authenticated %}
+            {% if request.user.group == 'admin' %}
+                <div class="row mx-auto pb-3">
+                    <div class="col mt-5">
+                        <div class="d-flex justify-content-center">
+                            <div class="row text-center justify-content-center" id=''>
+                                <div class="mb-3" id=''>
+                                    {% csrf_token %}
+                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
+                                        <a href="http://localhost:8000/library/delete/book/{{ book.id }}">Delete</a>
+                                        <!-- <p hidden>{{ book.id }}</p>
+                                        <p hidden>{% csrf_token %}</p> -->
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
 
@@ -66,6 +87,7 @@
         </div>
     </form>
     {% endif %}
+
 
     <!-- COMMENTS -->
     <div class="col mt-5">
@@ -197,6 +219,27 @@
         option5.prop('selected', true);
         rating_button.click()
     })
+
+    // // delete book btn
+    // let delete_btn = $("#delete");
+    // let csrf_token = delete_btn.children("p")[1].innerHTML.split("value=\"")[1].replace("\">", "")
+    // delete_btn.on("click", async (e) => {
+    //     let book_id = delete_btn.children("p")[0].textContent
+    //     alert("Delete this book from library?")
+
+    //     let response = await fetch(`http://localhost:8000/library/delete/book/${book_id}`,{
+    //         method: "DELETE",
+    //         mode: 'cors',
+    //         cache: "no-cache",
+    //         credentials: "same-origin",
+    //         headers: {
+    //             "Content-Type": "multipart/form-data"
+    //         },
+    //         body: {"book_id": book_id}
+    //     })
+    //     console.log(response.json())
+    // })
+
 </script>
 
 {% endblock %}
