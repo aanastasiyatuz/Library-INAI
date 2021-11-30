@@ -16,6 +16,25 @@
             <h3 class="text-white mt-3 ml-2 mb-5 text-center">{{ order.returnDate }}</h3>
             {% else %}
             <p class="mb-5 text-center" style="color: red;" id='big-p'>Not Returned</p>
+            <!-- RETURN BOOK -->
+            {% if request.user.is_authenticated %}
+            {% if request.user.group == 'admin' %}
+            <div class="row mx-auto pb-3">
+                    <div class="col mt-5">
+                        <div class="d-flex justify-content-center">
+                            <div class="row text-center justify-content-center" id=''>
+                                <div class="mb-3" id=''>
+                                    {% csrf_token %}
+                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
+                                        <a href="http://localhost:8000/library/delete/order/{{ order.id }}">Return</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endif %}
             {% endif %}
         </div>
     </div>

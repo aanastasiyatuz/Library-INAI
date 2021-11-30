@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.http.response import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
@@ -38,7 +39,8 @@ class OrderList(LoginRequiredMixin,ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-
+        if user.group == 'admin':
+            context['orders'] = Order.objects.all()
         context['orders'] = Order.objects.filter(student=user)
 
         search = self.request.GET.get('q')
@@ -117,9 +119,20 @@ class BookUpdate(UpdateView):
 
 
 """--------DELETE---------"""
-class BookDelete(DeleteView):
-    model = Book
-    template_name = 'delete-book.html'
-    success_url = reverse_lazy('books')
-    permission_classes = [IsAdminPermission, ]
-    pk_url_kwarg = 'id'
+def BookDelete(request, id):
+    if isinstance(request.user, User) and request.user.group == 'admin':
+        Book.objects.get(id=id).delete()
+        return redirect(reverse_lazy("books"))
+    else:
+        return HttpResponseNotAllowed(f"Something went wrong")
+
+def OrderDelete(request, id):
+    if isinstance(request.user, User) and request.user.group == 'admin':
+        order = Order.objects.get(id=id)
+        order.is_returned = True
+        order.book.is_available = True
+        order.save()
+        order.book.save()
+        return redirect(reverse_lazy("orders"))
+    else:
+        return HttpResponseNotAllowed(f"Something went wrong")
