@@ -40,8 +40,9 @@ class OrderList(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         if user.group == 'admin':
-            context['orders'] = Order.objects.all()
-        context['orders'] = Order.objects.filter(student=user)
+            context['orders'] = Order.objects.order_by('is_returned')
+        else:
+            context['orders'] = Order.objects.filter(student=user)
 
         search = self.request.GET.get('q')
         if search:
@@ -128,8 +129,10 @@ def BookDelete(request, id):
 
 def OrderDelete(request, id):
     if isinstance(request.user, User) and request.user.group == 'admin':
+        from datetime import date
         order = Order.objects.get(id=id)
         order.is_returned = True
+        order.returnDate = date.today()
         order.book.is_available = True
         order.save()
         order.book.save()
