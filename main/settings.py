@@ -102,7 +102,7 @@ LOGIN_URL = '/account/login/'
 LOGOUT_REDIRECT_URL = '/library/'
 
 # email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 EMAIL_HOST = 'smtp.gmail.com'
 DEFAULT_FROM_EMAIL, EMAIL_HOST_USER = config('EMAIL_HOST_USER'), config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

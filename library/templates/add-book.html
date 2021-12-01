@@ -2,9 +2,18 @@
 {% block title%}Add book{% endblock %}
 {% block content %}
 
-<form method="post" enctype="multipart/form-data">
-    {{ book_form.as_p }}
-    {% csrf_token %}
-    <button type="submit">Add book</button>
-</form>
+<!-- title and book id
+    <p class="row mx-auto"> -->
+
+<div class="container">
+    <div class="row justify-content-center text-white">
+        <div class="mb-3" id='add_block' style="width: 450px;">
+        <form method="post" enctype="multipart/form-data">
+            {{ book_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-lg mb-3 mt-2 float-right mx-auto" id='add_book_btn'>Add book</button>
+        </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
