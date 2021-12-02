@@ -4,46 +4,17 @@
 <div class="container">
     <div class="mb-3 mx-auto" id="reg_block">
         <form class="row g-3 text-white" method="post" enctype="multipart/form-data">
-            <div hidden>
                 {{ registration_form.as_p }}
-            </div>
+                <button type="submit" class="btn btn-success btn-lg px-5" id="bt" style="width: 98%; margin-left: 1%;">Create an account</button>
             {% csrf_token %}
-            <div id="email"></div>
-            <div class="col-md-6" id="username"></div>
+            <!-- <div id="email"></div> -->
+            <!-- <div class="col-md-6" id="username"></div>
             <div class="col-md-6" id="last_name"></div>
             <div class="col-md-6" id="group"></div>
             <div class="col-md-6" id="phone"></div>
             <div class="col-md-6" id="password"></div>
-            <div class="col-md-6" id="password_confirm"></div>
-            <!-- <div class="col-md-6">
-                    <label for="" class="form-label">Select group</label>
-                    <select class="custom-select" id="gr">
-                        <option selected>AIN-1-21</option>
-                        <option value="1">AIN-2-21</option>
-                        <option value="2">AIN-3-21</option>
-                        <option value="3">MIN-21</option>
-                        <option value="3">WIN-21</option>
-                        <option selected>AIN-1-20</option>
-                        <option value="1">AIN-2-20</option>
-                        <option value="2">AIN-3-20</option>
-                        <option value="3">MIN-20</option>
-                        <option value="3">WIN-20</option>
-                        <option selected>AIN-1-19</option>
-                        <option value="1">AIN-2-19</option>
-                        <option value="2">AIN-3-19</option>
-                        <option value="3">MIN-19</option>
-                        <option value="3">WIN-19</option>
-                        <option selected>AIN-1-18</option>
-                        <option value="1">AIN-2-18</option>
-                        <option value="2">AIN-3-18</option>
-                        <option value="3">MIN-18</option>
-                        <option value="3">WIN-18</option>
-                    </select>
-                </div> -->
-            <div class="invalid-feedback" hidden>
-
+            <div class="col-md-6" id="password_confirm"></div> -->
             </div>
-            <button type="submit" class="btn btn-success btn-lg px-5" id="bt" style="width: 98%; margin-left: 1%;">Create an account</button>
         </form>
     </div>
     <div class="d-flex justify-content-center">
@@ -75,30 +46,30 @@
     let password_input = $("#id_password")
     let password_cofirmation_input = $("#id_password_confirmation")
 
-    // divs
-    let email_div = $("#email")
-    let username_div = $("#username")
-    let last_name_div = $("#last_name")
-    let group_div = $("#group")
-    let phone_div = $("#phone")
-    let password_div = $("#password")
-    let password_confirm_div = $("#password_confirm")
+    // // divs
+    // let email_div = $("#email")
+    // let username_div = $("#username")
+    // let last_name_div = $("#last_name")
+    // let group_div = $("#group")
+    // let phone_div = $("#phone")
+    // let password_div = $("#password")
+    // let password_confirm_div = $("#password_confirm")
 
-    // add labels to div
-    email_label.prependTo(email_div)
-    email_label.after(email_input)
-    username_label.prependTo(username_div)
-    username_label.after(username_input)
-    last_name_label.prependTo(last_name_div)
-    last_name_label.after(last_name_input)
-    group_label.prependTo(group_div)
-    group_label.after(group_input)
-    phone_label.prependTo(phone_div)
-    phone_label.after(phone_input)
-    password_label.prependTo(password_div)
-    password_label.after(password_input)
-    password_cofirmation_label.prependTo(password_confirm_div)
-    password_cofirmation_label.after(password_cofirmation_input)
+    // // add labels to div
+    // email_label.prependTo(email_div)
+    // email_label.after(email_input)
+    // username_label.prependTo(username_div)
+    // username_label.after(username_input)
+    // last_name_label.prependTo(last_name_div)
+    // last_name_label.after(last_name_input)
+    // group_label.prependTo(group_div)
+    // group_label.after(group_input)
+    // phone_label.prependTo(phone_div)
+    // phone_label.after(phone_input)
+    // password_label.prependTo(password_div)
+    // password_label.after(password_input)
+    // password_cofirmation_label.prependTo(password_confirm_div)
+    // password_cofirmation_label.after(password_cofirmation_input)
 
     // add class form-label
     email_label.addClass("form-label")
@@ -118,15 +89,23 @@
     password_input.addClass("form-control")
     password_cofirmation_input.addClass("form-control")
 
-    //errors
-    errors_div = $(".invalid-feedback")
-    console.log(errors_div)
-    errors = $(".errorlist")
-    if (errors.length) {
-        errors_div.prop("hidden", false)
-        for (let count = 0; count != errors.length; count++) {
-            console.log(errors.get(count))
-        }
-    }
+    // add class col-md-6
+    username_input.parent('p').addClass("col-md-6")
+    last_name_input.parent('p').addClass("col-md-6")
+    group_input.parent('p').addClass("col-md-6")
+    phone_input.parent('p').addClass("col-md-6")
+    password_input.parent('p').addClass("col-md-6")
+    password_cofirmation_input.parent('p').addClass("col-md-6")
+
+    // //errors
+    // errors_div = $(".invalid-feedback")
+    // console.log(errors_div)
+    // errors = $(".errorlist")
+    // if (errors.length) {
+    //     errors_div.prop("hidden", false)
+    //     for (let count = 0; count != errors.length; count++) {
+    //         console.log(errors.get(count))
+    //     }
+    // }
 </script>
 {% endblock %}

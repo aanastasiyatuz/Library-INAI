@@ -7,10 +7,11 @@
             <input name="q" type="search" class="form-control" placeholder="Search book" aria-label="Search book" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary text-white" type="submit" id="button-search">Search</button>
         </form>
+        {% block innercontent %}
+        <h5><a href="{% url 'available' %}" style="color: #0E566C;">Only available</a></h5>
+        {% endblock %}
     </div>
 </div>
-<input type="checkbox" id="checkbox_available">
-<label for="checkbox_available">Only available</label>
 
 <div class="container mt-5" style="width:1000px">
     <div class="row pb-3 rounded" id="list">

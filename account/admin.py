@@ -9,7 +9,7 @@ class OrderInline(admin.TabularInline):
     fields = ['book', 'returnDate']
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['group', 'last_name']
+    list_display = ['group', 'last_name', 'is_active']
     list_filter = ['group','username', 'last_name', 'email']
     fields = [('group', 'phone', 'username', 'last_name', 'email', 'password')]
     inlines = [OrderInline]
