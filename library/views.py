@@ -22,12 +22,19 @@ class BookList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         search = self.request.GET.get('q')
-
-        if search and search != 'available':
+        if search:
             context['books'] = Book.objects.filter(title__icontains=search)
-        if search == 'available':
-            context['books'] = Book.objects.filter(is_available=True)
+        return context
 
+class AvailableBookList(ListView):
+    model = Book
+    template_name = 'books-available.html'
+    paginate_by = 10
+    context_object_name = 'books'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = Book.objects.filter(is_available=True)
         return context
 
 class OrderList(LoginRequiredMixin,ListView):

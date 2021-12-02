@@ -51,6 +51,7 @@
         <div class="card-body">
           <h3 class="card-title text-white">{{ order.book }}</h3>
           <h4 class="card-text text-white pt-2">{{ order.dateOfIssue }}</h4>
+          <h4 class="card-text text-white">[{{ order.student.group }}] {{ order.student.username }} {{ order.student.last_name }}</h4>
           {% if order.is_returned %}
           <p class="mt-2" style="color: green;" id='big-p'>Returned</p>
           <h4 class="card-text text-white">{{ order.returnDate }}</h4>
