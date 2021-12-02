@@ -18,9 +18,9 @@
         <div class="container mt-4">
             {% for book in books %}
             <div class="row pb-3 mx-auto mb-4 rounded" id="book">
-                <div class="col">
+                <div class="col-md-4">
                     <a href="{% url 'book-detail' book.id %}">
-                        <img src="{{ book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="..." width="450">
+                        <img src="{{ book.image.url }}" class="rounded img-fluid float-start mx-3 mt-3 mb-3" alt="..." width="450">
                     </a>
                 </div>
                 <div class="col mx-auto">
@@ -51,35 +51,7 @@
         </div>
     </div>
 
-    <div class="container mb-3 justify-content-center rounded mt-5 pt-1" style="max-width: 1000px;" id='list'>
-        {% for book in books %}
-        <div class="row g-0 mt-4 my-2 py-4" id='info'>
-          <div class="col-md-4">
-            <img src="{{ book.image.url }}" class="img-fluid rounded-start mx-auto" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-                <div class="row mx-3 mt-3 px-4 rounded" id="">
-                    <ul class="">
-                        <li class="mx-auto mb-3">
-                            <h3 class='text-white mt-3 ml-2' id=''>Book: {{ book.title }}</h3>
-                        </li>
-                        {% if book.is_available %}
-                        <li class="mx-auto">
-                            <h3 class='text-white mt-3 ml-2'>Status: <span style="color: rgb(27, 165, 27);">available</span></h3>
-                        </li>
-                        {% else %}
-                        <li class="mx-auto">
-                            <h3 class='text-white mt-3 ml-2'>Status: <span style="color: rgb(148, 29, 29);">not available</span></h3>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
+    
     <script>
         let checkbox = $("#checkbox_available");
         checkbox.on('click', (e) => {
