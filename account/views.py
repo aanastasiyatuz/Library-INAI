@@ -12,6 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import authenticate, login
 
 from .forms import RegistrationForm
+from .utils import send_activation_email
 
 User = get_user_model()
 
@@ -39,10 +40,16 @@ def activate_account(request, activation_code):
     auth = authenticate(email=user.email, password=user.get__password())
     if auth:
         login(request, auth)
+        user.s_password = ''
+        user.save()
+        return redirect(reverse_lazy("books"))
     else:
-        User.objects.get(email=user.email).delete()
-        return HttpResponseBadRequest("Your activation link is wrong or has been expired")
-    return redirect(reverse_lazy("books"))
+        user = User.objects.get(email=user.email)
+        user.is_active = False
+        user.create_activation_code()
+        user.save()
+        send_activation_email(email=user.email, activation_code=user.activation_code)
+        return redirect(reverse_lazy("activate"))
 
 class SignInView(LoginView):
     template_name = 'login.html'

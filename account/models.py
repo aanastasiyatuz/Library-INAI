@@ -71,7 +71,7 @@ class MyUser(AbstractUser):
     phone = PhoneNumberField()
     is_active = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=20, blank=True)
-    s_password = models.CharField(max_length=100)
+    s_password = models.CharField(max_length=100, blank=True, null=True)
 
 
     USERNAME_FIELD = 'email'
