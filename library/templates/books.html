@@ -13,12 +13,12 @@
     </div>
 </div>
 
-<div class="container mt-5">
-    <div class="row pb-3 rounded justify-content-center mx-2" id="list">
+<div class="container mt-5" style='width: 90%;'>
+    <div class="row pb-3 rounded justify-content-center mx-auto" id="list">
         <div class="container mt-4">
             {% for book in books %}
-            <div class="row pb-3 mx-auto mb-4 rounded" id="book">
-                <div class="col-md-4">
+            <div class="row mx-auto mb-4 rounded" id="book">
+                <div class="col-md-4 mx-auto">
                     <a href="{% url 'book-detail' book.id %}">
                         <img src="{{ book.image.url }}" class="rounded img-fluid float-start mx-3 mt-3 mb-3 mx-auto" alt="..." width="" id='book_img'>
                     </a>
