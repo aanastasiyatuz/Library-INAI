@@ -78,7 +78,7 @@ li {
 }
 
 #header_btn,
-#comment {
+#comment, #books {
     background-color: #0E566C;
 }
 
@@ -96,16 +96,16 @@ img {
 }
 
 #add_book_btn {
-    background-color:limegreen;
+    background-color:limegreen
 }
 
 #scroll {
     overflow-y: scroll;
     background-color: #61A6BC;
-    height: 400px;
+    height: 350px;
 }
 
-@media (min-width:995px) {
+/* @media (min-width:995px) {
     #sign_block,
     #reg_block {
         width: 50%;
@@ -114,4 +114,14 @@ img {
 
 rating {
     width: 50px;
+} */
+
+
+@media (min-width:995px) {
+    #sign_block,
+    #reg_block
+    #list
+    #book_img {
+        width: 50%;
+    }
 }

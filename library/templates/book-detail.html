@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% block title%}Title{% endblock %} {% block content %}
 
 
-<div class="container mt-5 rounded mb-3" id='list'>
+<div class="container mt-5 rounded" id='list'>
     <!-- INFO -->
-    <div class="row mx-auto pb-3">
-        <div class="col mt-5">
-            <img src="{{ book.image.url }}" alt="..." class="rounded mx-auto d-block">
+    <div class="row justify-content-around">
+        <div class="col-md-5 mx-auto mt-5">
+            <img src="{{ book.image.url }}" alt="..." class="rounded img-fluid mx-auto d-block" id="book_img" width="">
         </div>
-        <div class="col mt-5 rounded mx-3 d-block" id='info'>
+        <div class="col-md-5 mt-5 rounded mx-auto" id='info'>
             <h1 class='text-white text-center mt-5'>{{ book.title }}</h1>
             <h3 class="text-white mt-5 text-center">{{ book.book_id }}</h3>
 
@@ -48,14 +48,14 @@
             <!-- DELETE -->
             {% if request.user.is_authenticated %}
             {% if request.user.group == 'admin' %}
-                <div class="row mx-auto pb-3">
-                    <div class="col mt-5">
+                <div class="row mx-auto pb-2">
+                    <div class="col mt-3">
                         <div class="d-flex justify-content-center">
                             <div class="row text-center justify-content-center" id=''>
                                 <div class="mb-3" id=''>
                                     {% csrf_token %}
-                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
-                                        <a href="http://localhost:8000/library/delete/book/{{ book.id }}">Delete</a>
+                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3 tr" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
+                                        <a href="http://localhost:8000/library/delete/book/{{ book.id }}" class="text-white">Delete</a>
                                         <!-- <p hidden>{{ book.id }}</p>
                                         <p hidden>{% csrf_token %}</p> -->
                                     </button>
@@ -75,7 +75,7 @@
         <div class="row mx-auto pb-3">
             <div class="col mt-5">
                 <div class="d-flex justify-content-center">
-                    <div class="row text-center justify-content-center" id=''>
+                    <div class="row justify-content-center" id=''>
                         <div class="mb-3" id=''>
                             {% csrf_token %}
                             <button class="btn btn-lg mx-auto px-5 pt-3
@@ -92,7 +92,7 @@
     <!-- COMMENTS -->
     <div class="col mt-5">
         <h1 class='text-white form-label text-center' for='scroll'>Comments</h1>
-        <div class="row mx-5 rounded pb-2" id='scroll'>
+        <div class="row mx-1 rounded pb-2" id='scroll'>
             <div class="col mt-5">
                 <div class="container">
                     {% for comment in comments %}
@@ -117,11 +117,11 @@
         </div>
     </div>
     {% if request.user.is_authenticated %}
-    <div class="row mx-3 pb-3 mt-5 justify-content-center">
+    <div class="row mx-1 pb-3 mt-5 justify-content-center">
         <!-- ADD COMMENT -->
         <form method="post" enctype="multipart/form-data">
             <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Add comment</h1>
-            <div class="mb-3 mx-5">
+            <div class="mb-3 mx-1">
                 {{ comment_form.as_p }} {% csrf_token %}
             </div>
             <div class="col mt-4 text-center">
