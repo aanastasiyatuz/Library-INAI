@@ -92,7 +92,7 @@ img {
 }
 
 #big-p {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 #add_book_btn {
@@ -124,4 +124,11 @@ rating {
     #book {
         width: 50%;
     }
+}
+
+#flex{
+    /* width: ; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

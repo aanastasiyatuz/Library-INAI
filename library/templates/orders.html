@@ -2,46 +2,9 @@
 {% load static %} 
 
 {% block content %} 
+{% if orders %}
 {% for order in orders %}
-<!--
-<div class="container mt-5 rounded mb-3" id='list'>
-    <div class="row mx-auto pb-3">
-        <div class="col mt-5">
-            <img src="{{ order.book.image.url }}" class="rounded float-start mx-3 mt-3 mb-3" alt="...">
-        </div>
-        <div class="col mt-5 rounded mx-3 d-block" id='info'>
-            <h1 class='text-white mt-3 ml-2 mb-5 text-center'>{{ order.book }}</h1>
-            <h3 class='text-white mt-3 ml-2 mb-5 text-center'>{{ order.dateOfIssue }}</h3>
-            <h3 class='text-white mt-3 ml-2 mb-5 text-center'>[{{ order.student.group }}] {{ order.student.username }} {{ order.student.last_name }}</h3>
-            {% if order.is_returned %}
-            <p class="mb-5 text-center" style="color: green;" id='big-p'>Returned</p>
-            <h3 class="text-white mt-3 ml-2 mb-5 text-center">{{ order.returnDate }}</h3>
-            {% else %}
-            <p class="mb-5 text-center" style="color: red;" id='big-p'>Not Returned</p>
-             RETURN BOOK
-            {% if request.user.is_authenticated %}
-            {% if request.user.group == 'admin' %}
-            <div class="row mx-auto pb-3">
-                    <div class="col mt-5">
-                        <div class="d-flex justify-content-center">
-                            <div class="row text-center justify-content-center" id=''>
-                                <div class="mb-3" id=''>
-                                    {% csrf_token %}
-                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
-                                        <a href="http://localhost:8000/library/delete/order/{{ order.id }}">Return</a>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            {% endif %}
-            {% endif %}
-        </div>
-    </div>
-</div>
--->
+
 <div class="container mb-3 justify-content-center rounded mt-5">
     <div class="row mx-auto" id='list'>
       <div class="col-md-4 mx-auto">
@@ -87,4 +50,13 @@
     </div>
   </div>
 {% endfor %} 
+{% else %}
+<div class="container">
+    <div class="row text-center justify-content-center">
+        <div class="mb-3" id='sign_block' style="width: 900px;">
+            <h1 style="color: white;">You haven't took a book yet</h1>
+        </div>  
+    </div>
+</div>
+{% endif %}
 {% endblock %}

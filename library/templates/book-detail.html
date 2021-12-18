@@ -1,100 +1,85 @@
 {% extends 'base.html' %} {% block title%}Title{% endblock %} {% block content %}
 
 
-<div class="container mt-5 rounded" id='list'>
+<div class="container mt-5 mb-5 pb-5 rounded" id='list'>
     <!-- INFO -->
     <div class="row justify-content-around">
         <div class="col-md-5 mx-auto mt-5">
             <img src="{{ book.image.url }}" alt="..." class="rounded img-fluid mx-auto d-block" id="book_img" width="">
         </div>
-        <div class="col-md-5 mt-5 rounded mx-auto" id='info'>
-            <h1 class='text-white text-center mt-5'>{{ book.title }}</h1>
-            <h3 class="text-white mt-5 text-center">{{ book.book_id }}</h3>
-
-            {% if book.is_available %}
-            <p class=" mt-5 text-center" id='big-p' style="color:limegreen">Available</p>
-            {% else %}
-            <p class=" mt-5 text-center" id='big-p' style="color:red">Not available</p>
-            {% endif %}
-
-            <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
-            <!-- ADD RATING -->
-            {% if request.user.is_authenticated %}
-            <form method="post" enctype="multipart/form-data" class="col text-center">
-                <div>
-                    <i class="far fa-star fa-3x" id="star-1"></i>
-                    <i class="far fa-star fa-3x" id="star-2"></i>
-                    <i class="far fa-star fa-3x" id="star-3"></i>
-                    <i class="far fa-star fa-3x" id="star-4"></i>
-                    <i class="far fa-star fa-3x" id="star-5"></i>
-                </div>
-
-                {{ rating_form.as_p }}
-                <p id="my_rating" hidden>{{ my_rating }}</p>
-                {% csrf_token %}
-                <button type="submit" id="rating-button" hidden></button>
-            </form>
-            {% else %}
-            <div class="col text-center">
-                <div>
-                    <i class="far fa-star fa-3x"></i>
-                    <i class="far fa-star fa-3x"></i>
-                    <i class="far fa-star fa-3x"></i>
-                    <i class="far fa-star fa-3x"></i>
-                    <i class="far fa-star fa-3x"></i>
-                </div>
-            </div>
-            {% endif %}
+        <div class="col-md-5 mt-5 rounded mx-auto" id='info' style="height: 430px;">
+            <h1 class='text-white text-center mt-5' style="font-size: 30px;">{{ book.title }} <br>[{{ book.book_id }}]</h1>
             <!-- DELETE -->
             {% if request.user.is_authenticated %}
             {% if request.user.group == 'admin' %}
-                <div class="row mx-auto pb-2">
-                    <div class="col mt-3">
-                        <div class="d-flex justify-content-center">
-                            <div class="row text-center justify-content-center" id=''>
-                                <div class="mb-3" id=''>
-                                    {% csrf_token %}
-                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3 tr" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
-                                        <a href="http://localhost:8000/library/delete/book/{{ book.id }}" class="text-white">Delete</a>
-                                        <!-- <p hidden>{{ book.id }}</p>
-                                        <p hidden>{% csrf_token %}</p> -->
-                                    </button>
+                        {% csrf_token %}
+                        <button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: rgb(255, 51, 0);">
+                            <a href="http://localhost:8000/library/delete/book/{{ book.id }}" class="text-white" style="text-decoration: none;">delete</a>
+                        </button>
+                        <button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: green">
+                                <a href="http://localhost:8000/library/update/book/{{ book.id }}" class="text-white" style="text-decoration: none;">update</a>
+                            </button>
+                {% else %}
+                <!-- TAKE -->
+                {% if book.is_available %}
+                <form method="post">
+                    <div class="row mx-auto pb-3">
+                        <div class="col mt-5">
+                            <div class="d-flex justify-content-center">
+                                <div class="row justify-content-center" id=''>
+                                    <div class="mb-3" id=''>
+                                        {% csrf_token %}
+                                        <button class="btn btn-lg mx-auto mt-3 mb-3" type="submit" id="cr" style="width:450px;font-size: 20px;">Take book</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+                {% endif %}
+                {% endif %}
             {% endif %}
+
+            <!-- ADD RATING -->
+            <div class="col text-center">
+                <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
+                {% if request.user.is_authenticated %}
+                <form method="post" enctype="multipart/form-data">
+                    <div>
+                        <i class="far fa-star fa-2x" id="star-1"></i>
+                        <i class="far fa-star fa-2x" id="star-2"></i>
+                        <i class="far fa-star fa-2x" id="star-3"></i>
+                        <i class="far fa-star fa-2x" id="star-4"></i>
+                        <i class="far fa-star fa-2x" id="star-5"></i>
+                    </div>
+                    
+                    {{ rating_form.as_p }}
+                    <p id="my_rating" hidden>{{ my_rating }}</p>
+                    {% csrf_token %}
+                    <button type="submit" id="rating-button" hidden></button>
+                </form>
+            </div>
+            {% else %}
+            <div class="col text-center">
+                <div>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
-
-    <!-- TAKE -->
-    {% if book.is_available %}
-    <form method="post">
-        <div class="row mx-auto pb-3">
-            <div class="col mt-5">
-                <div class="d-flex justify-content-center">
-                    <div class="row justify-content-center" id=''>
-                        <div class="mb-3" id=''>
-                            {% csrf_token %}
-                            <button class="btn btn-lg mx-auto px-5 pt-3
-                                pb-3" type="submit" id="cr">Take book</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    {% endif %}
-
-
+    
+    
     <!-- COMMENTS -->
-    <div class="col mt-5">
-        <h1 class='text-white form-label text-center' for='scroll'>Comments</h1>
+        <div class="col mt-5" id="flex">
         <div class="row mx-1 rounded pb-2" id='scroll'>
             <div class="col mt-5">
                 <div class="container">
+                    {% if comments %}
                     {% for comment in comments %}
                     <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
                         <div class="row mt-3">
@@ -112,24 +97,37 @@
                         </div>
                     </div>
                     {% endfor %}
+                    {% else %}
+                    <div class="row mx-auto rounded mb-4 justify-content-between" id='comment' style="width: 520px;">
+                        <div class="row mt-3 mb-3">
+                            <div class="col float-right">
+                                <h6 class='float-right text-white'>No comments</h6>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
+            {% if request.user.is_authenticated %}
+            <div class="row mx-1 pb-3 mt-5 justify-content-center" style="width: 40%;">
+                <!-- ADD COMMENT -->
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3 mx-1">
+                        {{ comment_form.as_p }} {% csrf_token %}
+                    </div>
+                    <div class="col mt-4 text-center">
+                        <button class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt" type="submit">Add comment</button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="row mx-1 pb-3 mt-5 justify-content-center" style="width: 40%;">
+                <!-- ADD COMMENT -->
+                    <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Log in to add a comment</h1>
+            </div>
+            {% endif %}
         </div>
     </div>
-    {% if request.user.is_authenticated %}
-    <div class="row mx-1 pb-3 mt-5 justify-content-center">
-        <!-- ADD COMMENT -->
-        <form method="post" enctype="multipart/form-data">
-            <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Add comment</h1>
-            <div class="mb-3 mx-1">
-                {{ comment_form.as_p }} {% csrf_token %}
-            </div>
-            <div class="col mt-4 text-center">
-                <button class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt" type="submit">Add comment</button>
-            </div>
-        </form>
-    </div>
-    {% endif %}
 </div>
 
 <script>
@@ -219,26 +217,6 @@
         option5.prop('selected', true);
         rating_button.click()
     })
-
-    // // delete book btn
-    // let delete_btn = $("#delete");
-    // let csrf_token = delete_btn.children("p")[1].innerHTML.split("value=\"")[1].replace("\">", "")
-    // delete_btn.on("click", async (e) => {
-    //     let book_id = delete_btn.children("p")[0].textContent
-    //     alert("Delete this book from library?")
-
-    //     let response = await fetch(`http://localhost:8000/library/delete/book/${book_id}`,{
-    //         method: "DELETE",
-    //         mode: 'cors',
-    //         cache: "no-cache",
-    //         credentials: "same-origin",
-    //         headers: {
-    //             "Content-Type": "multipart/form-data"
-    //         },
-    //         body: {"book_id": book_id}
-    //     })
-    //     console.log(response.json())
-    // })
 
 </script>
 

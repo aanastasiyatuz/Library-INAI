@@ -121,10 +121,14 @@ class BookUpdate(UpdateView):
     model = Book
     template_name = 'update-book.html'
     form_class = BookForm
-    success_url = 'books.html'
+    success_url = reverse_lazy('books')   
     pk_url_kwarg = 'id'
     permission_classes = [IsAdminPermission, ]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['book_form'] = self.get_form(self.get_form_class())
+        return context
 
 """--------DELETE---------"""
 def BookDelete(request, id):
