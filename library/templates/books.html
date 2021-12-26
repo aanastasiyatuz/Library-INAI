@@ -28,6 +28,7 @@
 <div class="container mt-5 mb-5 pb-5 " style='width: 90%;'>
     <div class="row pb-3 rounded justify-content-center mx-auto" id="list">
         <div class="container mt-4">
+            {% if books %}
             {% for book in books %}
             <div class="row mx-auto mb-4 rounded" id="book">
                 <div class="col-md-4 mx-auto book_img_div">
@@ -63,6 +64,11 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="row mx-auto mb-4 rounded" id="book">
+                <h3 class='text-white mt-3 ml-2'>Sorry, we don't have this book</h3>
+            </div>
+            {% endif %}
         </div>
     </div>
 
