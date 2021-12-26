@@ -9,7 +9,7 @@ class Book(models.Model):
     book_id = models.CharField(max_length=100)
     is_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='books')
-    average_rating = models.IntegerField()
+    average_rating = models.DecimalField(max_digits=5, decimal_places=2)
 
     def get_average_rating(self):
         ratings = Rating.objects.filter(book=self)
