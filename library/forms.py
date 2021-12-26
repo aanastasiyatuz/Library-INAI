@@ -6,6 +6,10 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'book_id', 'is_available', 'image']
+    
+    def save(self, commit=True):
+        self.instance.average_rating = 0
+        return super().save(commit=commit)
 
 class CommentForm(forms.ModelForm):
     class Meta:
