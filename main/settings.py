@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     
-    # email
-    'rocket_engine',
 ]
 
 MIDDLEWARE = [
@@ -105,17 +103,18 @@ LOGIN_URL = '/account/login/'
 LOGOUT_REDIRECT_URL = '/library/'
 
 # email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
-EMAIL_PORT = 2587
-EMAIL_USE_TLS = True
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
-# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
+# EMAIL_PORT = 2587
+# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
 DEFAULT_FROM_EMAIL, EMAIL_HOST_USER = config('EMAIL_HOST_USER'), config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS   = True
-# ACTIVATE_USERS_EMAIL = True
+EMAIL_PORT = 587
+EMAIL_USE_TLS   = True
+ACTIVATE_USERS_EMAIL = True
+EMAIL_USE_SSL = False
 
 # celery
 CELERY_TIMEZONE = "Asia/Almaty"
