@@ -75,7 +75,7 @@ li {
     background-color: #4995ad;
 }
 
-#header_btn,
+.header_btn,
 #comment, #books {
     background-color: #0E566C;
 }
@@ -115,19 +115,79 @@ rating {
 } */
 
 
-@media (min-width:995px) {
-    #sign_block,
-    #reg_block,
-    #list,
-    #book,
-    #filter_div {
-        width: 50%;
-    }
-}
 
 #flex{
     /* width: ; */
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media (max-width: 807px) {
+    #sign_block,
+    #reg_block{
+        width: 50% !important;
+    }
+    #filter_div{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-direction: column !important;  
+        width: 535px !important;      
+        padding-left: 30px !important;
+    }
+    .book_img_div{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    #create{
+        display: flex;
+        justify-content: center;
+    }
+    .header_btn, .header_div{
+        width:inherit;
+    }
+    #filter_div div{
+        width:inherit
+    }
+}
+@media (max-width:520px) {
+    #sign_block,
+    #reg_block{
+        width: 50% !important;
+    }
+    #filter_div{
+        height: 126px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;  
+    }
+    #filter_div div{
+        display: flex !important;
+        align-items: flex-start !important;
+        height: 57px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-direction: column !important;
+        width: 329px !important;
+    }
+    .book_img_div{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    #rating_filter_ul{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 300px !important;
+        margin-top: 17px !important;
+        padding: 0 !important;
+    }
+    .header_btn, .header_div{
+        width:inherit;
+    }
 }

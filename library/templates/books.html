@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="container mt-5">
-    <div class="row">
+    <div class="row" style="display: flex;flex-direction: column; align-items: center;">
 
         <form class="input-group mb-4" method="get" action="{% url 'books' %}">
             <input name="q" type="search" class="form-control" placeholder="Search book" aria-label="Search book" aria-describedby="button-addon2">
@@ -10,9 +10,9 @@
         {% block innercontent %}
         <div style="display: flex; align-items: center; justify-content: space-between;" id="filter_div">
             <a href="{% url 'available' %}" style="color: #0E566C;margin:0; padding:0"><h3 style="margin:0; padding:0">Only available</h3></a>
-            <div style="display: flex; align-items: center; height: 57px;margin:0; padding:0">
-                <ul style="display: flex; align-items: center; justify-content: space-between; width: 450px; margin:0; padding:0">
-                    <h3 style="margin:0; padding:0">Filter by rating:</h3>
+            <div style="display: flex; align-items: center; height: 57px;margin:0; padding:0;">
+                <h3 style="margin:0; padding:0; padding-right: 10px;">Filter by rating:</h3>
+                <ul style="display: flex; align-items: center; justify-content: space-between; width: 450px; margin:0; padding:0" id="rating_filter_ul">
                     <a href="{% url 'books' %}?rating=1" style="color: #0E566C;"><button class="btn btn-outline-secondary">1</button></a>
                     <a href="{% url 'books' %}?rating=2" style="color: #0E566C;"><button class="btn btn-outline-secondary">2</button></a>
                     <a href="{% url 'books' %}?rating=3" style="color: #0E566C;"><button class="btn btn-outline-secondary">3</button></a>
@@ -30,7 +30,7 @@
         <div class="container mt-4">
             {% for book in books %}
             <div class="row mx-auto mb-4 rounded" id="book">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-4 mx-auto book_img_div">
                     <a href="{% url 'book-detail' book.id %}">
                         <img src="{{ book.image.url }}" class="rounded img-fluid float-start mx-3 mt-3 mb-3 mx-auto" alt="..." width="" id='book_img'>
                     </a>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="row text-center justify-content-center">
                         <div class="mb-3" id='create'>
-                            <a class="btn btn-lg" href="{% url 'book-detail' book.id %}" role="button" id="create-akk">Details</a>
+                            <a href="{% url 'book-detail' book.id %}"  ><button class="btn btn-lg btn_details" id="create-akk">Details</button></a>
                         </div>
                     </div>
                 </div>
