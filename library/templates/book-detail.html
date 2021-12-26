@@ -39,7 +39,7 @@
             {% endif %}
             <!-- ADD RATING -->
             <div class="col text-center">
-                <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
+                <p class='text-center text-white' id='big-p'>Rating: {{ book.get_average_rating }}</p>
                 {% if request.user.is_authenticated %}
                 <form method="post" enctype="multipart/form-data">
                     <div>
@@ -64,6 +64,7 @@
                     <i class="far fa-star fa-2x"></i>
                     <i class="far fa-star fa-2x"></i>
                 </div>
+                <p class='text-center text-white' id='big-p'>You can not add rating, please log in</p>
             </div>
             {% endif %}
         </div>
