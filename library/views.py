@@ -22,11 +22,11 @@ class BookList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         search = self.request.GET.get('q')
+        [str(_) for _ in Book.objects.all()]
         if search:
             context['books'] = Book.objects.filter(title__icontains=search)
         filter = self.request.GET.get('rating')
         if filter:
-            [str(_) for _ in Book.objects.all()]
             context['books'] = Book.objects.filter(average_rating__gte=int(filter))
         return context
 
