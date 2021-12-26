@@ -24,6 +24,10 @@ class BookList(ListView):
         search = self.request.GET.get('q')
         if search:
             context['books'] = Book.objects.filter(title__icontains=search)
+        filter = self.request.GET.get('rating')
+        if filter:
+            [str(_) for _ in Book.objects.all()]
+            context['books'] = Book.objects.filter(average_rating__gte=int(filter))
         return context
 
 class AvailableBookList(ListView):

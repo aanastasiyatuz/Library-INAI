@@ -9,6 +9,7 @@ class Book(models.Model):
     book_id = models.CharField(max_length=100)
     is_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='books')
+    average_rating = models.IntegerField()
 
     def get_average_rating(self):
         ratings = Rating.objects.filter(book=self)
@@ -18,6 +19,8 @@ class Book(models.Model):
         return 0
 
     def __str__(self):
+        self.average_rating = self.get_average_rating()
+        self.save()
         return f"{' '.join([i.capitalize() for i in self.title.split()])} - [ {self.book_id} ]"
 
 class Order(models.Model):

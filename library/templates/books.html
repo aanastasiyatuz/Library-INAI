@@ -8,7 +8,19 @@
             <button class="btn btn-outline-secondary text-white" type="submit" id="button-search">Search</button>
         </form>
         {% block innercontent %}
-        <h5><a href="{% url 'available' %}" style="color: #0E566C;">Only available</a></h5>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="{% url 'available' %}" style="color: #0E566C;margin:0; padding:0"><h3 style="margin:0; padding:0">Only available</h3></a>
+            <div style="display: flex; align-items: center; height: 57px;margin:0; padding:0">
+                <ul style="display: flex; align-items: center; justify-content: space-between; width: 450px; margin:0; padding:0">
+                    <h3 style="margin:0; padding:0">Filter by rating:</h3>
+                    <a href="{% url 'books' %}?rating=1" style="color: #0E566C;"><button class="btn btn-outline-secondary">1</button></a>
+                    <a href="{% url 'books' %}?rating=2" style="color: #0E566C;"><button class="btn btn-outline-secondary">2</button></a>
+                    <a href="{% url 'books' %}?rating=3" style="color: #0E566C;"><button class="btn btn-outline-secondary">3</button></a>
+                    <a href="{% url 'books' %}?rating=4" style="color: #0E566C;"><button class="btn btn-outline-secondary">4</button></a>
+                    <a href="{% url 'books' %}?rating=5" style="color: #0E566C;"><button class="btn btn-outline-secondary">5</button></a>
+                </ul>
+            </div>
+        </div>
         {% endblock %}
     </div>
 </div>
@@ -38,6 +50,9 @@
                                 <h3 class='text-white mt-3 ml-2'>Status: <span style="color: rgb(148, 29, 29);">not available</span></h3>
                             </li>
                             {% endif %}
+                            <li class="mx-auto mb-3">
+                                <h3 class='text-white mt-3 ml-2'>Rating: {{ book.average_rating }}</h3>
+                            </li>
                         </ul>
                     </div>
                     <div class="row text-center justify-content-center">
