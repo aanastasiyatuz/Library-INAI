@@ -1,0 +1,165 @@
+{% extends 'base.html' %} {% block title%}Title{% endblock %} {% block content %}
+<div class="container mt-5 mb-5 pb-5 rounded" id='list'>
+    <!-- INFO -->
+    <div class="row justify-content-around">
+        <div class="col-md-5 mx-auto mt-5">
+            <img src="{{ book.image.url }}" alt="..." class="rounded img-fluid mx-auto d-block" id="book_img" width="">
+        </div>
+        <div class="col-md-5 mt-5 rounded mx-auto" id='info' style="height: 430px;">
+            <h1 class='text-white text-center mt-5' style="font-size: 30px;">{{ book.title }} <br>[{{ book.book_id }}]</h1>
+            <!-- DELETE -->
+            {% if request.user.is_authenticated %}
+            {% if request.user.group == 'admin' %}
+                        {% csrf_token %}
+                        <a href="{% url 'delete-book' book.id %}" class="text-white" style="text-decoration: none;"><button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: rgb(255, 51, 0);">delete</button></a>
+                        <a href="{% url 'update-book' book.id %}" class="text-white" style="text-decoration: none;"><button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: green">update</button></a>
+                {% else %}
+                <!-- TAKE -->
+                {% if book.is_available %}
+                <form method="post">
+                    <div class="row mx-auto pb-3">
+                        <div class="col mt-5">
+                            <div class="d-flex justify-content-center">
+                                <div class="row justify-content-center" id=''>
+                                    <div class="mb-3" id=''>
+                                        {% csrf_token %}
+                                        <button class="btn btn-lg mx-auto mt-3 mb-3" type="submit" id="cr" style="width:450px;font-size: 20px;">Take book</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+                {% endif %}
+            {% endif %}
+            <!-- ADD RATING -->
+            <div class="col text-center">
+                <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
+                {% if request.user.is_authenticated %}
+                <form method="post" enctype="multipart/form-data">
+                    <div>
+                        <i class="far fa-star fa-2x" id="star-1"></i>
+                        <i class="far fa-star fa-2x" id="star-2"></i>
+                        <i class="far fa-star fa-2x" id="star-3"></i>
+                        <i class="far fa-star fa-2x" id="star-4"></i>
+                        <i class="far fa-star fa-2x" id="star-5"></i>
+                    </div>
+                    {{ rating_form.as_p }}
+                    <p id="my_rating" hidden>{{ my_rating }}</p>
+                    {% csrf_token %}
+                    <button type="submit" id="rating-button" hidden></button>
+                </form>
+            </div>
+            {% else %}
+            <div class="col text-center">
+                <div>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                    <i class="far fa-star fa-2x"></i>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- COMMENTS -->
+        <div class="col mt-5" id="flex">
+        <div class="row mx-1 rounded pb-2" id='scroll'>
+            <div class="col mt-5">
+                <div class="container">
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <div class="row mx-auto rounded mb-4 justify-content-between" id='comment'>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h3 class='text-white'>{{ comment.student }}</h3>
+                            </div>
+                            <div class="col gap-2 d-md-flex justify-content-md-end">
+                                <h6 class='float-right text-white'>{{ comment.date }}</h6>
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col float-right">
+                                <h6 class='float-right text-white '>{{ comment.body }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="row mx-auto rounded mb-4 justify-content-between" id='comment' style="width: 520px;">
+                        <div class="row mt-3 mb-3">
+                            <div class="col float-right">
+                                <h6 class='float-right text-white'>No comments</h6>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="row mx-1 pb-3 mt-5 justify-content-center" style="width: 40%;">
+                <!-- ADD COMMENT -->
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3 mx-1">
+                        {{ comment_form.as_p }} {% csrf_token %}
+                    </div>
+                    <div class="col mt-4 text-center">
+                        <button class="btn btn-success btn-lg px-5 mx-auto float-right" id="bt" type="submit">Add comment</button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="row mx-1 pb-3 mt-5 justify-content-center" style="width: 40%;">
+                <!-- ADD COMMENT -->
+                    <h1 for="exampleFormControlTextarea1" class="form-label text-white text-center">Log in to add a comment</h1>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // bootstrap css
+    let comment_label = $("[for=\"id_body\"]")
+    comment_label.remove()
+    let comment_textarea = $("textarea")
+    comment_textarea.addClass("form-control")
+    comment_textarea.prop("rows", "5")
+    comment_textarea.prop("id", "exampleFormControlTextarea1")
+    let rating_label = $("[for=\"id_rating\"]")
+    rating_label.empty()
+    // RATING
+    let my_rating = $("#my_rating").text()
+    let rating_button = $("#rating-button")
+    let rating = $("[name=\"rating\"]")
+    rating.prop('hidden', true)
+    // options
+    let option1 = $("[value=\"1\"]")
+    let option2 = $("[value=\"2\"]")
+    let option3 = $("[value=\"3\"]")
+    let option4 = $("[value=\"4\"]")
+    let option5 = $("[value=\"5\"]")
+    // stars
+    let star1 = $("#star-1")
+    let star2 = $("#star-2")
+    let star3 = $("#star-3")
+    let star4 = $("#star-4")
+    let star5 = $("#star-5")
+    // show my rating
+    if (my_rating) {if (my_rating === "1") {star1.toggleClass("fas");}if (my_rating === "2") {star1.toggleClass("fas");star2.toggleClass("fas");}if (my_rating === "3") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");}if (my_rating === "4") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");star4.toggleClass("fas");}if (my_rating === "5") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");star4.toggleClass("fas");star5.toggleClass("fas");}}
+    // // animation
+    // star1.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");})
+    // star2.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");})
+    // star3.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");})
+    // star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
+    // star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
+    star1.on("click", (e) => {option1.prop('selected', true);rating_button.click()})
+    star2.on("click", (e) => {option2.prop('selected', true);rating_button.click()})
+    star3.on("click", (e) => {option3.prop('selected', true);rating_button.click()})
+    star4.on("click", (e) => {option4.prop('selected', true);rating_button.click()})
+    star5.on("click", (e) => {option5.prop('selected', true);rating_button.click()})
+</script>
+
+{% endblock %}

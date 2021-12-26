@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %} 
+{% if orders %}
+{% for order in orders %}
+
+<div class="container mb-3 justify-content-center rounded mt-5">
+    <div class="row mx-auto" id='list' style="width: 820px;">
+      <div class="col-md-4 mx-auto" style="width: auto;">
+        <img src="{{ order.book.image.url }}" class="img-fluid rounded-start mx-auto my-3" alt="..." id='book_img' style="height: 153px;">
+      </div>
+      <div class="col-md-7 my-3 mx-auto rounded" id='info' style="height: 153px;width: 546px;">
+        <div class="card-body">
+          <h3 class="card-title text-white" style="font-size: 20px;">{{ order.book }}</h3>
+          <h4 class="card-text text-white pt-2" style="font-size: 13px;">{{ order.dateOfIssue }}</h4>
+          <h4 class="card-text text-white" style="font-size: 15px;">[{{ order.student.group }}] {{ order.student.username }} {{ order.student.last_name }}</h4>
+          {% if order.is_returned %}
+          <p class="mt-2" style="color: green;font-size: 14px; display: inline; margin-right: 10px;">Returned</p>
+          <h4 class="card-text text-white" style="font-size: 15px;">{{ order.returnDate }}</h4>
+          {% else %}
+            <p class="mt-2" style="color: red;color: red;font-size: 14px; display: inline; margin-right: 10px;">Not Returned</p>
+            {% if request.user.is_authenticated %}
+            {% if request.user.group == 'admin' %}
+            {% csrf_token %}
+            <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
+                <a href="http://localhost:8000/library/decline/order/{{ order.id }}" class="text-white" style="width: 12px;">Decline</a>
+            </button>
+            <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
+              <a href="http://localhost:8000/library/return/order/{{ order.id }}" class="text-white" style="width: 12px;">Return</a>
+            </button>
+            <!--                        
+            <div class="row mx-auto pb-3">
+                    <div class="col">
+                        <div class="d-flex">
+                            <div class="row justify-content-center" id=''>
+                                <div class="mb-3" id=''>
+                                    {% csrf_token %}
+                                    <button class="btn btn-lg mx-auto px-5 pt-3 pb-3" type="submit" id="delete" style="padding-left: 130px;padding-right: 130px;margin-top: 20px;font-size: 20px;background-color: rgb(255, 51, 0);">
+                                        <a href="http://localhost:8000/library/delete/order/{{ order.id }}" class="text-white">Return</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            -->
+            {% endif %}
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %} 
+{% else %}
+<div class="container">
+    <div class="row text-center justify-content-center">
+        <div class="mb-3" id='sign_block' style="width: 900px;">
+            <h1 style="color: white;">You haven't took a book yet</h1>
+        </div>  
+    </div>
+</div>
+{% endif %}
+{% endblock %}

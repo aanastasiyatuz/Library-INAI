@@ -1,0 +1,132 @@
+body {
+    background-color: #5FBCDA !important;
+}
+
+#sign,
+#reg {
+    font-size: 100px;
+}
+
+#sign_block, #add_block {
+    background-color: #4995ad;
+    border-radius: 12px;
+    margin-top: 60px;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+#input {
+    margin-bottom: 30px;
+}
+
+#bt {
+    background-color: green;
+    margin-bottom: 20px;
+}
+
+#cr {
+    padding-left: 130px!important;
+    padding-right: 130px!important;
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: limegreen;
+}
+
+#create-akk {
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.btn {
+    background-color: #4995ad;
+    color: white;
+}
+
+#tx {
+    font-size: 20px;
+    margin-right: 100px;
+}
+
+#reg_block {
+    background-color: #4995ad;
+    border-radius: 12px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#gr {
+    margin-right: 200px;
+}
+
+#reg_btn {
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+#header,
+#button-search,
+#list,
+#name_book,
+li {
+    background-color: #4995ad;
+}
+
+#header_btn,
+#comment, #books {
+    background-color: #0E566C;
+}
+
+#book,
+#info {
+    background-color: #61A6BC;
+}
+
+img {
+    height: 600px;
+}
+
+#big-p {
+    font-size: 30px;
+}
+
+#add_book_btn {
+    background-color:limegreen
+}
+
+#scroll {
+    overflow-y: scroll;
+    background-color: #61A6BC;
+    height: 350px;
+}
+
+/* @media (min-width:995px) {
+    #sign_block,
+    #reg_block {
+        width: 50%;
+    }
+}
+
+rating {
+    width: 50px;
+} */
+
+
+@media (min-width:995px) {
+    #sign_block,
+    #reg_block
+    #list
+    #book {
+        width: 50%;
+    }
+}
+
+#flex{
+    /* width: ; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

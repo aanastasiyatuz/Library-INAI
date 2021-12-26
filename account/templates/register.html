@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% load static %} {% block title%}Sign Up{% endblock %} {% block content %}
+
+<div class="d-flex justify-content-center mt-5 text-white" id="reg" style="font-size: 70px;">Sign up</div>
+<div class="container" style="width: 550px;">
+    <div class="mb-3 mx-auto" id="reg_block">
+        <form class="row g-3 text-white" method="post" enctype="multipart/form-data">
+                {{ registration_form.as_p }}
+                <button type="submit" class="btn btn-success btn-lg px-5" id="bt" style="width: 98%; margin-left: 1%;">Create an account</button>
+            {% csrf_token %}
+            <!-- <div id="email"></div> -->
+            <!-- <div class="col-md-6" id="username"></div>
+            <div class="col-md-6" id="last_name"></div>
+            <div class="col-md-6" id="group"></div>
+            <div class="col-md-6" id="phone"></div>
+            <div class="col-md-6" id="password"></div>
+            <div class="col-md-6" id="password_confirm"></div> -->
+            </div>
+        </form>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="row text-center justify-content-center">
+            <div class="mb-3" id='create'>
+                <a class="btn btn-lg" href="{% url 'login' %}" role="button" id="create-akk">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // labels
+    let email_label = $("[for=\"id_email\"]")
+    let username_label = $("[for=\"id_username\"]")
+    let last_name_label = $("[for=\"id_last_name\"]")
+    let group_label = $("[for=\"id_group\"]")
+    let phone_label = $("[for=\"id_phone\"]")
+    let password_label = $("[for=\"id_password\"]")
+    let password_cofirmation_label = $("[for=\"id_password_confirmation\"]")
+
+    // inputs
+    let email_input = $("#id_email")
+    let username_input = $("#id_username")
+    let last_name_input = $("#id_last_name")
+    let group_input = $("#id_group")
+    let phone_input = $("#id_phone")
+    let password_input = $("#id_password")
+    let password_cofirmation_input = $("#id_password_confirmation")
+
+    // // divs
+    // let email_div = $("#email")
+    // let username_div = $("#username")
+    // let last_name_div = $("#last_name")
+    // let group_div = $("#group")
+    // let phone_div = $("#phone")
+    // let password_div = $("#password")
+    // let password_confirm_div = $("#password_confirm")
+
+    // // add labels to div
+    // email_label.prependTo(email_div)
+    // email_label.after(email_input)
+    // username_label.prependTo(username_div)
+    // username_label.after(username_input)
+    // last_name_label.prependTo(last_name_div)
+    // last_name_label.after(last_name_input)
+    // group_label.prependTo(group_div)
+    // group_label.after(group_input)
+    // phone_label.prependTo(phone_div)
+    // phone_label.after(phone_input)
+    // password_label.prependTo(password_div)
+    // password_label.after(password_input)
+    // password_cofirmation_label.prependTo(password_confirm_div)
+    // password_cofirmation_label.after(password_cofirmation_input)
+
+    // add class form-label
+    email_label.addClass("form-label")
+    username_label.addClass("form-label")
+    last_name_label.addClass("form-label")
+    group_label.addClass("form-label")
+    phone_label.addClass("form-label")
+    password_label.addClass("form-label")
+    password_cofirmation_label.addClass("form-label")
+
+    // add class form-control
+    email_input.addClass("form-control")
+    username_input.addClass("form-control")
+    last_name_input.addClass("form-control")
+    group_input.addClass("form-control")
+    phone_input.addClass("form-control")
+    password_input.addClass("form-control")
+    password_cofirmation_input.addClass("form-control")
+
+    // add class col-md-6
+    username_input.parent('p').addClass("col-md-6")
+    last_name_input.parent('p').addClass("col-md-6")
+    group_input.parent('p').addClass("col-md-6")
+    phone_input.parent('p').addClass("col-md-6")
+    password_input.parent('p').addClass("col-md-6")
+    password_cofirmation_input.parent('p').addClass("col-md-6")
+
+    // //errors
+    // errors_div = $(".invalid-feedback")
+    // console.log(errors_div)
+    // errors = $(".errorlist")
+    // if (errors.length) {
+    //     errors_div.prop("hidden", false)
+    //     for (let count = 0; count != errors.length; count++) {
+    //         console.log(errors.get(count))
+    //     }
+    // }
+</script>
+{% endblock %}

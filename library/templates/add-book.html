@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title%}Add book{% endblock %}
+{% block content %}
+
+<!-- title and book id
+    <p class="row mx-auto"> -->
+
+<div class="container">
+    <div class="row justify-content-center text-white">
+        <div class="mb-3" id='add_block' style="width: 450px;">
+        <form method="post" enctype="multipart/form-data">
+            {{ book_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-lg mb-3 mt-2 float-right mx-auto form-control" id='add_book_btn'>Add book</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // labels
+    let title_label = $("[for=\"id_title\"]")
+    let book_id_label = $("[for=\"id_book_id\"]")
+    let is_available_label = $("[for=\"id_is_available\"]")
+    let image_label = $("[for=\"id_image\"]")
+
+    // inputs
+    let title_input = $("#id_title")
+    let book_id_input = $("#id_book_id")
+    let is_available_input = $("#id_is_available")
+    let image_input = $("#id_image")
+
+    // add class form-label
+    title_label.addClass("form-label")
+    book_id_label.addClass("form-label")
+    image_label.addClass("form-label")
+
+    // add class form-control
+    title_input.addClass("form-control")
+    book_id_input.addClass("form-control")
+    image_input.addClass("form-control")
+    
+</script>
+{% endblock %}
