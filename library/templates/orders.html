@@ -23,12 +23,16 @@
             {% if request.user.is_authenticated %}
             {% if request.user.group == 'admin' %}
             {% csrf_token %}
-            <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
-                <a href="{% url 'decline-order' order.id %}" class="text-white" style="width: 12px;">Decline</a>
-            </button>
-            <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
-              <a href="{% url 'return-order' order.id %}" class="text-white" style="width: 12px;">Return</a>
-            </button>
+            <a href="{% url 'decline-order' order.id %}" class="text-white" style="width: 12px;">
+              <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
+                Decline
+              </button>
+            </a>
+            <a href="{% url 'return-order' order.id %}" class="text-white" style="width: 12px;">
+              <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
+                Return
+              </button>
+            </a>
             <!--                        
             <div class="row mx-auto pb-3">
                     <div class="col">
