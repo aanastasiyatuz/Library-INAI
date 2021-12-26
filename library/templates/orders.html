@@ -24,10 +24,10 @@
             {% if request.user.group == 'admin' %}
             {% csrf_token %}
             <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
-                <a href="http://localhost:8000/library/decline/order/{{ order.id }}" class="text-white" style="width: 12px;">Decline</a>
+                <a href="{% url 'decline-order' order.id %}" class="text-white" style="width: 12px;">Decline</a>
             </button>
             <button class="btn btn-sm mx-auto px-5 pt-2 pb-2" type="submit" id="delete" style="background-color: rgb(255, 51, 0); display: inline;">
-              <a href="http://localhost:8000/library/return/order/{{ order.id }}" class="text-white" style="width: 12px;">Return</a>
+              <a href="{% url 'return-order' order.id %}" class="text-white" style="width: 12px;">Return</a>
             </button>
             <!--                        
             <div class="row mx-auto pb-3">
