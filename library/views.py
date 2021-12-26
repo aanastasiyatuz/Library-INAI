@@ -138,7 +138,18 @@ def BookDelete(request, id):
     else:
         return HttpResponseNotAllowed(f"Something went wrong")
 
-def OrderDelete(request, id):
+def OrderDecline(request, id):
+    if isinstance(request.user, User) and request.user.group == 'admin':
+        from datetime import date
+        order = Order.objects.get(id=id)
+        order.book.is_available = True
+        order.book.save()
+        order.delete()
+        return redirect(reverse_lazy("orders"))
+    else:
+        return HttpResponseNotAllowed(f"Something went wrong")
+
+def OrderReturn(request, id):
     if isinstance(request.user, User) and request.user.group == 'admin':
         from datetime import date
         order = Order.objects.get(id=id)

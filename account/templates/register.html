@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block title%}Sign Up{% endblock %} {% block content %}
 
-<div class="d-flex justify-content-center mt-5 text-white" id="reg">Sign up</div>
-<div class="container">
+<div class="d-flex justify-content-center mt-5 text-white" id="reg" style="font-size: 70px;">Sign up</div>
+<div class="container" style="width: 550px;">
     <div class="mb-3 mx-auto" id="reg_block">
         <form class="row g-3 text-white" method="post" enctype="multipart/form-data">
                 {{ registration_form.as_p }}

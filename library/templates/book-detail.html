@@ -1,6 +1,4 @@
 {% extends 'base.html' %} {% block title%}Title{% endblock %} {% block content %}
-
-
 <div class="container mt-5 mb-5 pb-5 rounded" id='list'>
     <!-- INFO -->
     <div class="row justify-content-around">
@@ -13,12 +11,8 @@
             {% if request.user.is_authenticated %}
             {% if request.user.group == 'admin' %}
                         {% csrf_token %}
-                        <button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: rgb(255, 51, 0);">
-                            <a href="http://localhost:8000/library/delete/book/{{ book.id }}" class="text-white" style="text-decoration: none;">delete</a>
-                        </button>
-                        <button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: green">
-                                <a href="http://localhost:8000/library/update/book/{{ book.id }}" class="text-white" style="text-decoration: none;">update</a>
-                            </button>
+                        <a href="{% url 'delete-book' book.id %}" class="text-white" style="text-decoration: none;"><button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: rgb(255, 51, 0);">delete</button></a>
+                        <a href="{% url 'update-book' book.id %}" class="text-white" style="text-decoration: none;"><button class="btn btn-lg mx-auto mt-4 mb-4" type="submit" id="delete" style="width:220px;font-size: 20px;background-color: green">update</button></a>
                 {% else %}
                 <!-- TAKE -->
                 {% if book.is_available %}
@@ -39,7 +33,6 @@
                 {% endif %}
                 {% endif %}
             {% endif %}
-
             <!-- ADD RATING -->
             <div class="col text-center">
                 <p class='text-center text-white' id='big-p'>{{ book.get_average_rating }}</p>
@@ -52,7 +45,6 @@
                         <i class="far fa-star fa-2x" id="star-4"></i>
                         <i class="far fa-star fa-2x" id="star-5"></i>
                     </div>
-                    
                     {{ rating_form.as_p }}
                     <p id="my_rating" hidden>{{ my_rating }}</p>
                     {% csrf_token %}
@@ -72,8 +64,6 @@
             {% endif %}
         </div>
     </div>
-    
-    
     <!-- COMMENTS -->
         <div class="col mt-5" id="flex">
         <div class="row mx-1 rounded pb-2" id='scroll'>
@@ -138,86 +128,38 @@
     comment_textarea.addClass("form-control")
     comment_textarea.prop("rows", "5")
     comment_textarea.prop("id", "exampleFormControlTextarea1")
-
     let rating_label = $("[for=\"id_rating\"]")
     rating_label.empty()
-
-
     // RATING
     let my_rating = $("#my_rating").text()
     let rating_button = $("#rating-button")
     let rating = $("[name=\"rating\"]")
     rating.prop('hidden', true)
-
+    // options
     let option1 = $("[value=\"1\"]")
     let option2 = $("[value=\"2\"]")
     let option3 = $("[value=\"3\"]")
     let option4 = $("[value=\"4\"]")
     let option5 = $("[value=\"5\"]")
-
+    // stars
     let star1 = $("#star-1")
     let star2 = $("#star-2")
     let star3 = $("#star-3")
     let star4 = $("#star-4")
     let star5 = $("#star-5")
-
     // show my rating
-    if (my_rating) {
-        if (my_rating === "1") {
-            star1.toggleClass("fas")
-        }
-        if (my_rating === "2") {
-            star1.toggleClass("fas")
-            star2.toggleClass("fas")
-        }
-        if (my_rating === "3") {
-            star1.toggleClass("fas")
-            star2.toggleClass("fas")
-            star3.toggleClass("fas")
-        }
-        if (my_rating === "4") {
-            star1.toggleClass("fas")
-            star2.toggleClass("fas")
-            star3.toggleClass("fas")
-            star4.toggleClass("fas")
-        }
-        if (my_rating === "5") {
-            star1.toggleClass("fas")
-            star2.toggleClass("fas")
-            star3.toggleClass("fas")
-            star4.toggleClass("fas")
-            star5.toggleClass("fas")
-        }
-    }
-
+    if (my_rating) {if (my_rating === "1") {star1.toggleClass("fas");}if (my_rating === "2") {star1.toggleClass("fas");star2.toggleClass("fas");}if (my_rating === "3") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");}if (my_rating === "4") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");star4.toggleClass("fas");}if (my_rating === "5") {star1.toggleClass("fas");star2.toggleClass("fas");star3.toggleClass("fas");star4.toggleClass("fas");star5.toggleClass("fas");}}
     // // animation
     // star1.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");})
     // star2.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");})
     // star3.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");})
     // star4.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");})
     // star5.on("mouseenter", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");}).on("mouseleave", (e) => {star1.toggleClass("fas");star1.toggleClass("far");star2.toggleClass("fas");star2.toggleClass("far");star3.toggleClass("fas");star3.toggleClass("far");star4.toggleClass("fas");star4.toggleClass("far");star5.toggleClass("fas");star5.toggleClass("far");})
-
-    star1.on("click", (e) => {
-        option1.prop('selected', true);
-        rating_button.click()
-    })
-    star2.on("click", (e) => {
-        option2.prop('selected', true);
-        rating_button.click()
-    })
-    star3.on("click", (e) => {
-        option3.prop('selected', true);
-        rating_button.click()
-    })
-    star4.on("click", (e) => {
-        option4.prop('selected', true);
-        rating_button.click()
-    })
-    star5.on("click", (e) => {
-        option5.prop('selected', true);
-        rating_button.click()
-    })
-
+    star1.on("click", (e) => {option1.prop('selected', true);rating_button.click()})
+    star2.on("click", (e) => {option2.prop('selected', true);rating_button.click()})
+    star3.on("click", (e) => {option3.prop('selected', true);rating_button.click()})
+    star4.on("click", (e) => {option4.prop('selected', true);rating_button.click()})
+    star5.on("click", (e) => {option5.prop('selected', true);rating_button.click()})
 </script>
 
 {% endblock %}
