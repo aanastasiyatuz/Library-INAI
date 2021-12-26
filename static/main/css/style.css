@@ -117,9 +117,10 @@ rating {
 
 @media (min-width:995px) {
     #sign_block,
-    #reg_block
-    #list
-    #book {
+    #reg_block,
+    #list,
+    #book,
+    #filter_div {
         width: 50%;
     }
 }

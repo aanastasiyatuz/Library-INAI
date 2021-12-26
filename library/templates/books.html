@@ -8,7 +8,7 @@
             <button class="btn btn-outline-secondary text-white" type="submit" id="button-search">Search</button>
         </form>
         {% block innercontent %}
-        <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; justify-content: space-between;" id="filter_div">
             <a href="{% url 'available' %}" style="color: #0E566C;margin:0; padding:0"><h3 style="margin:0; padding:0">Only available</h3></a>
             <div style="display: flex; align-items: center; height: 57px;margin:0; padding:0">
                 <ul style="display: flex; align-items: center; justify-content: space-between; width: 450px; margin:0; padding:0">
