@@ -18,5 +18,9 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # sudo systemctl daemon-reload
 # sudo systemctl restart gunicorn
 
+
+# sudo journalctl --rotate
+# sudo journalctl --vacuum-time=1s
+
 # celery -A main beat
 # celery -A main worker -l INFO --pool=solo
